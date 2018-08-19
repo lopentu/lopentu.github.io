@@ -1,7 +1,7 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
-layout: home
+layout: default 
+title: LOPE @ NTU
+description: Lab of Ontologies Language Processing & e-Humanities 
 ---
-test
+
+[人文學群的 Python 程式設計入門 / Python Programming for Humanities](/PythonForHumanities)
