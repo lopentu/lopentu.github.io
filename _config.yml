@@ -6,6 +6,7 @@ description: >-
 baseurl: ""
 url: ""
 github_username: amigcamel 
+future: true
 
 # Build settings
 markdown: kramdown
