@@ -2,7 +2,7 @@ lang: zh-Hant-TW
 title: LOPENTU 
 email: amigcamel@gmail.com
 author: 阿吉
-pfh: /PythonForHumanities
+pfh_path: "/PythonForHumanities"
 description: >- 
   LOPENTU
 baseurl: ""
