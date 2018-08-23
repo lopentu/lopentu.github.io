@@ -7,7 +7,13 @@ layout: default_pfh
 
 <a class="btn" href="{{ site.pfh_path }}">回目錄</a>
 
-{{content}}
+{% include toc.html html=content %}
+
+<br />
+<hr />
+<br />
+
+{{ content }}
 
 {% if page.tags %}
   <small>tags: <em>{{ page.tags | join: "</em> - <em>" }}</em></small>
