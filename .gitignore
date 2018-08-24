@@ -69,3 +69,5 @@ tags
 
 
 # End of https://www.gitignore.io/api/vim,osx,linux,jekyll
+vendor/
+.bundle/
