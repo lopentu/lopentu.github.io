@@ -15,6 +15,10 @@ layout: default_pfh
 
 {{ content }}
 
+<br>
 {% if page.tags %}
-  <small>tags: <em>{{ page.tags | join: "</em> - <em>" }}</em></small>
+  標籤：
+  {% for tag in page.tags %}
+  <span class="tag">{{ tag }}</span>
+  {% endfor %}
 {% endif %}
