@@ -13,6 +13,11 @@
     body, h1, h2, h3, h4, h5, h6, p, div, a {
       font-family: Arial, "文泉驛正黑", "WenQuanYi Zen Hei", "儷黑 Pro", "LiHei Pro", "Microsoft JhengHei", "標楷體", DFKai-SB, sans-serif;
     }
+    .lecture_title {
+      font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+      text-decoration: none;
+      color: #b5e853;
+    }
     span.tag {
       display: inline;
       text-align: center;
@@ -30,7 +35,7 @@
 
     <header>
       <div class="container">
-        <h1>Python Programming for Humanities<span class="blinker"></span></h1>
+        <h1><a class="lecture_title" href="{{ site.pfh_path }}">Python Programming for Humanities</a><span class="blinker"></span></h1>
         <h2>人文學群的 Python 程式入門</h2>
 
         <section id="downloads">
