@@ -8,10 +8,11 @@
   -webkit-animation-duration: 1s;
           animation-duration: 1s;
   display: inline-block;
-  width: 4px;
-  height: 35px;
-  margin-left: 10px;
-  border-radius: 3px;
+  width: 3px;
+  height: 33px;
+  margin-left: 15px;
+  margin-bottom: -3px;
+  border-radius: 2px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
   background: #b5e853;
 }
