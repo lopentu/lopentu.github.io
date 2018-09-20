@@ -17,7 +17,7 @@
             # {{ page.path | split: "." | first | split: "/" | last | replace: "_", " " | capitalize }}
             
             {{ page.title }}
-            <div id="qrcode"></div>
+            <canvas id="qr"></canvas>
           </textarea>
         </section>
         {{ content }}
@@ -25,7 +25,7 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/lib/js/head.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/js/reveal.min.js"></script>
-    <script src="https://cdn.rawgit.com/chuckfairy/VanillaQR.js/96c2ccc4/VanillaQR.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <script type="text/javascript">
     (function(){
         var tId = setInterval(function() {
@@ -33,16 +33,11 @@
         }, 11);
         function onComplete(){
           clearInterval(tId);    
-          var qr = new VanillaQR({
-              url: window.location.href,
-              colorLight: "#fff",
-              colorDark: "#000",
-              toTable: false,
-              ecclevel: 1,
-              noBorder: false,
-              borderSize: 0
+          var qr = new QRious({
+            element: document.getElementById('qr'),
+            value: window.location.href,
+            size: 250,
           });
-          var d = document.getElementById('qrcode').appendChild(qr.domElement);
         };
     })()
     </script>
