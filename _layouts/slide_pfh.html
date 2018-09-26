@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="shortcut icon" href="{{ '/assets/favicon.ico' }}">
+    <link rel="stylesheet" href="{{ '/assets/reveal.js/css/reveal.css' }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/theme/night.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/tomorrow-night-bright.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/michaelhue/keyscss/76bb603e/keys.css">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/amigcamel/Reveal.js-Title-Footer/1aee978a/plugin/title-footer/title-footer.css">
+    <link rel="stylesheet" href="./assets/css/slides.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown>
+          <textarea data-template>
+            # {{ page.path | split: "." | first | split: "/" | last | replace: "_", " " | capitalize }}
+            
+            {{ page.title }}
+            <canvas id="qr"></canvas>
+          </textarea>
+        </section>
+        {{ content }}
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/lib/js/head.min.js"></script>
+    <script src="{{ '/assets/reveal.js/js/reveal.js' }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script type="text/javascript">
+    (function(){
+        var tId = setInterval(function() {
+          if (document.readyState == "complete") onComplete()
+        }, 11);
+        function onComplete(){
+          clearInterval(tId);    
+          var qr = new QRious({
+            element: document.getElementById('qr'),
+            value: window.location.href,
+            size: 250,
+          });
+        };
+    })()
+    </script>
+    <script>
+      Reveal.initialize({
+        history: true,
+        slideNumber: true,
+        dependencies: [
+          {src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          {src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          {src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/plugin/markdown/markdown.min.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          {src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/plugin/highlight/highlight.min.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          {src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/plugin/zoom-js/zoom.min.js', async: true },
+          {src: 'https://cdn.rawgit.com/denehyg/reveal.js-menu/master/menu.js', async: true},
+          {src: 'https://cdn.rawgit.com/amigcamel/Reveal.js-Title-Footer/557ee998/plugin/title-footer/title-footer.js', async: true, callback: function() { title_footer.initialize("人文學群的 Python 程式入門", null, "../"); }},
+        ]
+      });
+    </script>
+    {% if site.google_analytics %}
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', '{{ site.google_analytics }}', 'auto');
+        ga('send', 'pageview');
+      </script>
+    {% endif %}
+  </body>
+</html>
