@@ -13,7 +13,7 @@
   <body>
     <div class="reveal">
       <div class="slides">
-        <section data-markdown>
+        <section data-markdown data-menu-title="首頁">
           <textarea data-template>
             # {{ page.path | split: "." | first | split: "/" | last | replace: "_", " " | capitalize }}
             
@@ -46,6 +46,9 @@
       Reveal.initialize({
         history: true,
         slideNumber: true,
+        menu: {
+            hideMissingTitles: true,
+        },
         dependencies: [
           {src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
           {src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
