@@ -4,3 +4,6 @@
 [submodule "assets/reveal.js"]
 	path = assets/reveal.js
 	url = https://github.com/hakimel/reveal.js
+[submodule "CorpusLinguistics"]
+	path = CorpusLinguistics
+	url = git@github.com:lopentu/CorpusLinguistics.git
