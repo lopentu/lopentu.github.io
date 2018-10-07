@@ -6,4 +6,4 @@
 	url = https://github.com/hakimel/reveal.js
 [submodule "CorpusLinguistics"]
 	path = CorpusLinguistics
-	url = git@github.com:lopentu/CorpusLinguistics.git
+	url = https://github.com/lopentu/CorpusLinguistics.git
