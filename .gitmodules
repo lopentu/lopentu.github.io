@@ -4,3 +4,15 @@
 [submodule "assets/reveal.js"]
 	path = assets/reveal.js
 	url = https://github.com/hakimel/reveal.js
+[submodule "CorpusLinguistics"]
+	path = CorpusLinguistics
+	url = https://github.com/lopentu/CorpusLinguistics.git
+[submodule "assets/keyscss"]
+	path = assets/keyscss
+	url = https://github.com/michaelhue/keyscss.git
+[submodule "assets/Reveal.js-Title-Footer"]
+	path = assets/Reveal.js-Title-Footer
+	url = https://github.com/amigcamel/Reveal.js-Title-Footer.git
+[submodule "assets/reveal.js-menu"]
+	path = assets/reveal.js-menu
+	url = https://github.com/denehyg/reveal.js-menu.git
