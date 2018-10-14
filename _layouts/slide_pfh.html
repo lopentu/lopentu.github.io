@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="{{ '/assets/keyscss/keys.css' }}">
     <link rel="stylesheet" href="{{ '/assets/Reveal.js-Title-Footer/plugin/title-footer/title-footer.css' }}">
     <link rel="stylesheet" href="./assets/css/slides.css">
+    <link rel="stylesheet" href="./assets/css/btn-copy.css">
   </head>
   <body>
+    <div id="topmsg">已複製!</div>
     <div class="reveal">
       <div class="slides">
         <section data-markdown data-menu-title="首頁">
@@ -27,6 +29,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/lib/js/head.min.js"></script>
     <script src="{{ '/assets/reveal.js/js/reveal.js' }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
     <script>
       Reveal.initialize({
         history: true,
@@ -43,6 +46,7 @@
           {src: "{{ '/assets/reveal.js-menu/menu.js' }}", async: true},
           {src: "{{ '/assets/Reveal.js-Title-Footer/plugin/title-footer/title-footer.js' }}", async: true, callback: function() { title_footer.initialize("人文學群的 Python 程式入門", null, "../"); }},
           {src: "./assets/js/qrcode.js", async: true},
+          {src: "./assets/js/btn-copy.js", async: true},
         ]
       });
     </script>
