@@ -27,21 +27,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/lib/js/head.min.js"></script>
     <script src="{{ '/assets/reveal.js/js/reveal.js' }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-    <script type="text/javascript">
-    (function(){
-        var tId = setInterval(function() {
-          if (document.readyState == "complete") onComplete()
-        }, 11);
-        function onComplete(){
-          clearInterval(tId);    
-          var qr = new QRious({
-            element: document.getElementById('qr'),
-            value: window.location.href,
-            size: 250,
-          });
-        };
-    })()
-    </script>
     <script>
       Reveal.initialize({
         history: true,
@@ -57,6 +42,7 @@
           {src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/plugin/zoom-js/zoom.min.js', async: true },
           {src: "{{ '/assets/reveal.js-menu/menu.js' }}", async: true},
           {src: "{{ '/assets/Reveal.js-Title-Footer/plugin/title-footer/title-footer.css' }}", async: true, callback: function() { title_footer.initialize("人文學群的 Python 程式入門", null, "../"); }},
+          {src: "./assets/js/qrcode.js", async: true},
         ]
       });
     </script>
