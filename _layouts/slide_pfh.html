@@ -49,6 +49,12 @@
         menu: {
             hideMissingTitles: true,
         },
+        spotlight: {
+          toggleSpotlightOnMouseDown: false,
+        },
+        keyboard: {
+          83: function() { RevealSpotlight.toggleSpotlight() }, // "s"
+        },
         dependencies: [
           {src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
           {src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
@@ -57,6 +63,7 @@
           {src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/plugin/zoom-js/zoom.min.js', async: true },
           {src: "{{ '/assets/reveal.js-menu/menu.js' }}", async: true},
           {src: "{{ '/assets/Reveal.js-Title-Footer/plugin/title-footer/title-footer.css' }}", async: true, callback: function() { title_footer.initialize("人文學群的 Python 程式入門", null, "../"); }},
+          { src: '/assets/reveal.js-plugin-spotlight/spotlight.js' },
         ]
       });
     </script>
