@@ -15,7 +15,7 @@
     <div id="topmsg">已複製!</div>
     <div class="reveal">
       <div class="slides">
-        <section data-markdown data-menu-title="首頁">
+        <section data-background="{{ page.index_background }}" data-markdown data-menu-title="首頁">
           <textarea data-template>
             # {{ page.path | split: "." | first | split: "/" | last | replace: "_", " " | capitalize }}
             
