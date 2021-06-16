@@ -3,7 +3,10 @@ title: LOPENTU
 email: amigcamel@gmail.com
 author: 阿吉
 pfh_path: "/PythonForHumanities"
+<<<<<<< HEAD
+=======
 corpusling_path: "/CorpusLinguistics"
+>>>>>>> 550142fcb10f3d32bf0ae9864da27f2236ba320a
 description: >- 
   LOPENTU
 baseurl: ""

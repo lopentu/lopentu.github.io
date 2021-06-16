@@ -18,9 +18,10 @@ jobs:
     - name: Build documentation
       run: |
         ./zola build
+        cp -r old/Gemfile old/Gemfile.lock old/_config.yml old/.gitmodules assets CorpusLinguistics PythonForHumanities ./public/
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./public
-        enable_jekyll: false
+        enable_jekyll: true
