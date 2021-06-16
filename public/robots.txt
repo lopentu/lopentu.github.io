@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://lopentu.github.io/rlads2021/sitemap.xml
