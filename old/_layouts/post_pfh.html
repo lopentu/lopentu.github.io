@@ -1,0 +1,24 @@
+---
+layout: default_pfh
+---
+
+<small>{{ page.date | date: "%-d %B %Y" }}</small>
+<h1>{{ page.title | upcase }}</h1>
+
+<a class="btn" href="{{ site.pfh_path }}">回目錄</a>
+
+{% include toc.html html=content ordered=true %}
+
+<br />
+<hr />
+<br />
+
+{{ content }}
+
+<br>
+{% if page.tags %}
+  標籤：
+  {% for tag in page.tags %}
+  <span class="tag">{{ tag }}</span>
+  {% endfor %}
+{% endif %}

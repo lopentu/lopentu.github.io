@@ -1,0 +1,63 @@
+.author {
+    color: grey;
+    font-size: 0.85em;
+}
+.post h2 {
+    margin-top: 1em;
+}
+table {
+    margin: .85em 0;
+}
+
+.datacamp {
+    position: relative;
+    width: 10em;
+    height: 3em;
+    background: rgb(73, 73, 73);
+    border-radius: 15px;
+}
+.datacamp > img {
+    max-height: 90%;
+    max-width: 90%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+
+.sidebar-footer {
+    display: none;
+}
+@media (min-width: 48em) {
+    .sidebar-footer {
+        position: fixed;
+        display: block;
+        bottom: 1.5%;
+        width: 13rem;
+    }
+    .flex-container {
+        position: relative;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+    }
+    .space-between { 
+        justify-content: space-between; 
+    } 
+    .footer-icon {
+        height: 1.7em;
+        padding: 4px;
+        margin: 0;
+    }
+    .footer-icon:hover {
+        // box-shadow: 1px 1px 1px rgb(58, 58, 58);
+        background: rgb(255, 74, 74); //rgb(30, 255, 30);
+        padding: 3.5px;
+    }
+}

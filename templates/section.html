@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="post">
+  <h1 class="post-title">{{ section.title }}</h1>
+  <span class="author">{{ section.extra.author }}</span>
+  
+  <br>
+  {{ section.content | safe }}
+</div>
+{% endblock content %}
+

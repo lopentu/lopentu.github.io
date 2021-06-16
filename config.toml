@@ -1,0 +1,27 @@
+base_url = "https://lopentu.github.io/rlads2021"   # no trailing /
+compile_sass = true
+title = "LOPE Courses"
+description = "近年開設課程"
+generate_feed = true
+
+[extra]
+hyde_sticky = false
+hyde_reverse = false
+hyde_theme = "theme-base-0d"
+hyde_links = [
+    {url = "https://lopentu.github.io/rlads2021/", name = "109-2 程式設計與資料科學導論", target=""},
+    {url = "https://loperntu.github.io/comsem/", name = "108-1 計算語意學", target=""},
+    {url = "https://lopentu.github.io/CorpusLinguistics/", name = "107-1 語料庫語言學", target=""},
+    {url = "https://lopentu.github.io/PythonForHumanities/", name = "107-1 人文程式設計", target=""},
+]
+hyde_footer_links = [
+    {name = "website", title="LOPE @ NTU", url = "https://lope.linguistics.ntu.edu.tw/", icon = "https://lopen.linguistics.ntu.edu.tw/assets/icon/logo.jpg"},
+    {name = "GitHub", title="LOPE @ GitHub", url = "https://github.com/lopentu", icon = "https://api.iconify.design/la:github-alt.svg", style = "height:2em;margin-top:-0.15em"},
+    {name = "GIL", title="NTU GIL", url = "https://linguistics.ntu.edu.tw/", icon = "https://img.yongfu.name/affiliations/GIL.png", style = "height:1.9em;margin-top:-0.15em"},
+]
+favicon = "https://lopentu.github.io/resources/_media/favicon.ico"
+minify_html = true
+default_language = "zh-TW"
+[markdown]
+external_links_target_blank = true
+smart_punctuation = true

@@ -1,0 +1,34 @@
+lang: zh-Hant-TW
+title: LOPENTU 
+email: amigcamel@gmail.com
+author: 阿吉
+pfh_path: "/PythonForHumanities"
+<<<<<<< HEAD
+=======
+corpusling_path: "/CorpusLinguistics"
+>>>>>>> 550142fcb10f3d32bf0ae9864da27f2236ba320a
+description: >- 
+  LOPENTU
+baseurl: ""
+url: ""
+github_username: amigcamel 
+future: true
+
+# Build settings
+markdown: kramdown
+theme: jekyll-theme-hacker
+plugins:
+  - jekyll-feed
+google_analytics: UA-124240831-1
+
+# Exclude from processing.
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
+# exclude:
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
