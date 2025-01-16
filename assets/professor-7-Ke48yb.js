@@ -1,0 +1,1 @@
+const e=[{image:"shukai",name:"謝舒凱 教授",university:"德國杜賓根大學計算語言學博士",research:"研究領域：語料庫及計算語言學 / 詞彙語意學與語用學 / 文字與構詞學 / 語言與認知",email:"shukaihsieh@ntu.edu.tw",site:"https://loperntu.github.io/"}];export{e as default};
