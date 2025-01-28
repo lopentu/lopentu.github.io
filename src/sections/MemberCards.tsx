@@ -73,11 +73,11 @@ export default function MemberCards() {
               <Image
                 src={imageMap[member.image]}
                 alt={member.name}
-                height={160}
+                h={160}
               />
             </Card.Section>
             <Group position="apart" mt={10} style={{ alignItems: "center" }}>
-              <Text weight={700} size="lg" >
+              <Text size="lg" >
                 {member.name}
               </Text>
 
@@ -90,7 +90,7 @@ export default function MemberCards() {
                 </Badge>
               </Center>
             </Group>
-            <Text size="sm" color="dimmed" style={{ marginBottom: "20px" }}>
+            <Text size="sm" c="dimmed" style={{ marginBottom: "20px" }}>
               {member.researchField}
             </Text>
 
