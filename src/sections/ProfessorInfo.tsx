@@ -3,9 +3,11 @@ import { Group, ActionIcon, Title, Text } from "@mantine/core";
 import { IconMail, IconLink } from "@tabler/icons-react";
 
 import shukai from "../assets/images/member/shukai.png";
+import { useMediaQuery } from "@mantine/hooks";
 
 const ProfessorInfo = () => {
   const [data, setData] = useState([]);
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const imageMap = {
     shukai,
@@ -49,10 +51,10 @@ const ProfessorInfo = () => {
             />
             <div>
               <Title order={3}>{professor.name}</Title>
-              <Text fw={500} mt={10} mb={10}>
+              <Text w={isMobile ? 150 : 400} fw={500} mt={10} mb={10}>
                 {professor.university}
               </Text>
-              <Text w={400}>{professor.research}</Text>
+              <Text w={isMobile ? 150 : 400}>{professor.research}</Text>
 
               <Group position="left" spacing="sm" mt={20} mb={30}>
                 <ActionIcon
