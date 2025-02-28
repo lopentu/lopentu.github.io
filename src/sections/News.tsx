@@ -70,13 +70,12 @@ export default function News() {
                 </Badge> */}
               </Group>
 
-              <Text weight={700} size="lg" style={{ marginBottom: "10px" }}>
+              <Title order={5} size="lg">
                 {item.title}
-              </Text>
+              </Title>
 
               <Text
                 size="sm"
-                color="dimmed"
                 lineClamp={2}
                 dangerouslySetInnerHTML={{ __html: item.content }}
               />
@@ -89,6 +88,8 @@ export default function News() {
         opened={opened}
         onClose={() => setOpened(false)}
         title={currentNews?.title}
+        centered
+        size="70%"
       >
         {currentNews && (
           <>
@@ -98,9 +99,9 @@ export default function News() {
             <Badge color="blue" variant="light">
               {currentNews.tag}
             </Badge>
-            <Text size="sm" style={{ marginBottom: "10px" }}>
+            {/* <Text size="sm" style={{ marginBottom: "10px" }}>
               <strong>Status:</strong> {currentNews.status}
-            </Text>
+            </Text> */}
 
             <Text
               size="sm"
