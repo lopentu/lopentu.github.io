@@ -89,7 +89,7 @@ export default function News() {
         onClose={() => setOpened(false)}
         title={currentNews?.title}
         centered
-        size="70%"
+        size="auto"
       >
         {currentNews && (
           <>
