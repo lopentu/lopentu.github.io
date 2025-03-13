@@ -1,0 +1,1 @@
+const t=[{title:"Laurent Prevot, Sheng-Fu Wang, Jou-An Chi and Shu-Kai Hsieh (2025). Extending the BabyLM Initiative : Promoting Diversity in Datasets and Metrics through High-Quality Linguistic Corpora."}];export{t as default};
