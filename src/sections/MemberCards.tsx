@@ -25,6 +25,7 @@ import andy from "../assets/images/member/andy.png";
 import rick from "../assets/images/member/rick.png";
 import yuxuan from "../assets/images/member/yuxuan.png";
 import zhihan from "../assets/images/member/zhihan.png";
+import amanda from "../assets/images/member/amanda.png";
 
 type Member = {
   name: string;
@@ -53,6 +54,7 @@ export default function MemberCards() {
     rick,
     yuxuan,
     zhihan,
+    amanda,
   };
 
   useEffect(() => {
