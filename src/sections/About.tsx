@@ -47,11 +47,10 @@ export default function About() {
         本博士論文、30多本碩士論文，
         以及數件產學技術轉移。我們也竭誠歡迎大學部同學與有志一同的社群夥伴加入我們的研發行列。
       </Text>
-
       <Grid>
         {features.map((feature, index) => (
           <Grid.Col key={index} span={{ base: 12, md: 6 }}>
-            <Group align="flex-start" spacing="md" style={{ padding: "10px" }}>
+            <Group align="flex-start" spacing="md" wrap="nowrap" style={{ padding: "10px", flexDirection: "row" }}>
               <Image
                 src={imageMap[feature.image]}
                 alt={feature.title}
