@@ -16,23 +16,5 @@
     "description": "SoMe 為收錄了 PTT 和 Dcard 兩大論壇的語料庫。作為一個台灣特有的 BBS 系統，PTT 記錄了珍貴而有趣的社會語言文化現象。提供了語言接觸與演化和「精簡語言學」重要的經驗訊息。",
     "image": "ptt_corp",
     "link": "http://140.112.147.132/"
-  },
-  {
-    "title": "Chinese variation",
-    "description": "台灣國語和中國普通話的平行語料庫。",
-    "image": "chi_var",
-    "link": "https://lopen.linguistics.ntu.edu.tw/chivar/"
-  },
-  {
-    "title": "Lopatator",
-    "description": "Lopen 語料標記系統",
-    "image": "lopotator",
-    "link": "https://lopen.linguistics.ntu.edu.tw/lope.anno/"
-  },
-  {
-    "title": "Chinese Word Map (CWM)",
-    "description": "中文詞彙地圖是一個以華語文教學爲目的的詞彙知識素描混搭系統。",
-    "image": "cwm",
-    "link": "http://lope.linguistics.ntu.edu.tw/cwm/"
   }
 ]
