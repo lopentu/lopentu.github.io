@@ -10,3 +10,39 @@ body {
   width: 100%;
   background-color: white;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: 80px;
+}
+
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  padding: 10px 20px;
+  border-bottom: none;
+  box-shadow: none;
+  transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  background: transparent;
+  backdrop-filter: none;
+}
+
+.header.scrolled {
+  background: linear-gradient(45deg, #548CA8, #185ADB);
+  backdrop-filter: blur(10px);
+  animation: navbarFadeIn 0.5s ease-in-out;
+}
+
+@keyframes navbarFadeIn {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+

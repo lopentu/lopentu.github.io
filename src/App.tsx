@@ -7,28 +7,37 @@ import News from "./sections/News";
 import MainVisual from "./sections/MainVisual";
 import Alumni from "./sections/Alumni";
 import Member from "./sections/Member";
+import { AppShell, MantineProvider } from "@mantine/core";
+import Header from "./components/Header";
 
 export default function App() {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        minHeight: "100vh", 
-      }}
-    >
-
-      <MainVisual/>
-      <News/>
-      <About/>
-      <Resources/>
-      <Member/>
-      <Alumni/>
-      <Publications/>
+    <MantineProvider withGlobalStyles withNormalizeCSS>
+      <AppShell>
+        <Header />
+        <AppShell.Main>
+          <MainVisual />
+          <div id="news">
+            <News />
+          </div>
+          <div id="about">
+            <About />
+          </div>
+          <div id="resources">
+            <Resources />
+          </div>
+          <div id="member">
+            <Member />
+          </div>
+          <div id="alumni">
+            <Alumni />
+          </div>
+          <div id="publications">
+            <Publications />
+          </div>
+        </AppShell.Main>
+      </AppShell>
       <Footer />
-
-    </div>
+    </MantineProvider>
   );
 }
-
-
