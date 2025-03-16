@@ -15,10 +15,21 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <AppShell.Header className={scrolled ? "header scrolled" : "header"}>
       <Group position="apart">
-        <Image src={logoLope} alt="Logo" width={100} height="30px"/>
+        <Image
+          src={logoLope}
+          alt="Logo"
+          width={100}
+          height="30px"
+          style={{ cursor: "pointer" }}
+          onClick={scrollToTop}
+        />
 
         <Group gap="xl">
           <Anchor href="#news" c={"white"} underline="never" fw={500}>
