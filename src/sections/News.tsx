@@ -10,6 +10,7 @@ import {
 } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { client } from "../../libs/client"; // microCMSクライアントをインポート
+import NewsModal from "../components/NewsModal";
 
 type NewsItem = {
   id: string;
@@ -81,28 +82,11 @@ export default function News() {
         ))}
       </Grid>
 
-      <Modal
+      <NewsModal
         opened={opened}
         onClose={() => setOpened(false)}
-        title={currentNews?.title}
-        centered
-        size="auto"
-      >
-        {currentNews && (
-          <Container>
-            <Text size="xs" c="dimmed">
-              {currentNews.date.split("T")[0]}
-            </Text>
-            <Badge color="blue" variant="light" my={"md"}>
-              {currentNews.tag}
-            </Badge>
-            <Text
-              size="sm"
-              dangerouslySetInnerHTML={{ __html: currentNews.content }}
-            />
-          </Container>
-        )}
-      </Modal>
+        newsItem={currentNews}
+      />
     </Container>
   );
 }
