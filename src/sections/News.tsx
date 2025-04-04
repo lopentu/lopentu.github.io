@@ -4,29 +4,35 @@ import {
   Card,
   Text,
   Title,
-  Badge,
-  Group,
   Modal,
+  Badge,
+  Flex,
 } from "@mantine/core";
 import { useEffect, useState } from "react";
+import { client } from "../../libs/client"; // microCMSクライアントをインポート
 
 type NewsItem = {
+  id: string;
+  title: string;
   date: string;
   tag: string;
   status: string;
-  title: string;
   content: string;
 };
 
 export default function News() {
   const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
-  const [opened, setOpened] = useState(false); 
+  const [opened, setOpened] = useState(false);
   const [currentNews, setCurrentNews] = useState<NewsItem | null>(null);
 
   useEffect(() => {
     async function fetchNews() {
-      const data = await import("../data/news/news.json");
-      setNewsItems(data.default);
+      try {
+        const data = await client.get({ endpoint: "news" });
+        setNewsItems(data.contents); // microCMSのレスポンスに合わせてデータを設定
+      } catch (error) {
+        console.error("Failed to fetch news from CMS:", error);
+      }
     }
 
     fetchNews();
@@ -44,8 +50,8 @@ export default function News() {
       </Title>
 
       <Grid gutter="lg">
-        {newsItems.map((item, index) => (
-          <Grid.Col key={index} span={{ base: 12, sm: 6 }}>
+        {newsItems.map((item) => (
+          <Grid.Col key={item.id} span={{ base: 12, sm: 6 }}>
             <Card
               shadow="sm"
               padding="lg"
@@ -54,26 +60,17 @@ export default function News() {
               onClick={() => handleCardClick(item)}
               style={{ cursor: "pointer" }}
             >
-              <Group position="apart" style={{ marginBottom: "10px" }}>
-                <Text size="xs" color="dimmed">
-                  {item.date}
+              <Flex gap={"sm"}>
+                <Text size="xs" c="dimmed">
+                  {item.date.split("T")[0]}
                 </Text>
                 <Badge color="blue" variant="light">
                   {item.tag}
                 </Badge>
-                {/* <Badge
-                  color="green"
-                  variant="outline"
-                  style={{ marginBottom: "10px" }}
-                >
-                  {item.status}
-                </Badge> */}
-              </Group>
-
-              <Title order={5} size="lg">
+              </Flex>
+              <Title order={5} size="lg" my={"sm"}>
                 {item.title}
               </Title>
-
               <Text
                 size="sm"
                 lineClamp={2}
@@ -92,22 +89,18 @@ export default function News() {
         size="auto"
       >
         {currentNews && (
-          <>
-            <Text size="sm" color="dimmed" style={{ marginBottom: "10px" }}>
-              {currentNews.date}
+          <Container>
+            <Text size="xs" c="dimmed">
+              {currentNews.date.split("T")[0]}
             </Text>
-            <Badge color="blue" variant="light">
+            <Badge color="blue" variant="light" my={"md"}>
               {currentNews.tag}
             </Badge>
-            {/* <Text size="sm" style={{ marginBottom: "10px" }}>
-              <strong>Status:</strong> {currentNews.status}
-            </Text> */}
-
             <Text
               size="sm"
               dangerouslySetInnerHTML={{ __html: currentNews.content }}
             />
-          </>
+          </Container>
         )}
       </Modal>
     </Container>
