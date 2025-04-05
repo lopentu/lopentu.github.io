@@ -9,6 +9,7 @@ import {
 } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { client } from "../../libs/client";
+import { useNavigate } from "react-router-dom";
 
 type NewsItem = {
   id: string;
@@ -21,6 +22,11 @@ type NewsItem = {
 
 export default function NewsArchive() {
   const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
+  const navigate = useNavigate();
+
+  const handleCardClick = (newsItem: NewsItem) => {
+    navigate(`/news/${newsItem.id}`);
+  };
 
   useEffect(() => {
     async function fetchNews() {
@@ -37,10 +43,7 @@ export default function NewsArchive() {
     fetchNews();
   }, []);
 
-  const handleCardClick = (newsItem: NewsItem) => {
-    setCurrentNews(newsItem);
-    setOpened(true);
-  };
+
 
   return (
     <Container style={{ marginTop: "40px", marginBottom: "40px" }}>

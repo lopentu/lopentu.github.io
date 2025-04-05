@@ -11,6 +11,7 @@ import { AppShell, MantineProvider } from "@mantine/core";
 import Header from "./components/Header";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NewsArchive from "./sections/NewsArchive";
+import NewsDetail from "./sections/NewsDetail";
 
 export default function App() {
   return (
@@ -47,6 +48,7 @@ export default function App() {
                 }
               />
               <Route path="/news" element={<NewsArchive />} />
+              <Route path="/news/:id" element={<NewsDetail />} />{" "}
             </Routes>
           </AppShell.Main>
         </AppShell>

@@ -9,17 +9,16 @@ export default function Header() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === "/news") {
+    if (location.pathname === "/") {
+      const handleScroll = () => {
+        setScrolled(window.scrollY > window.innerHeight * 0.2);
+      };
+
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    } else {
       setScrolled(true);
-      return;
     }
-
-    const handleScroll = () => {
-      setScrolled(window.scrollY > window.innerHeight * 0.2);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   }, [location.pathname]);
 
   const scrollToTop = () => {
