@@ -1,19 +1,26 @@
 import { useState, useEffect } from "react";
 import { AppShell, Group, Anchor, Image } from "@mantine/core";
+import { useLocation } from "react-router-dom";
 import logoLope from "../assets/images/header/logo_lope.jpg";
 import "../app.css";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
+    if (location.pathname === "/news") {
+      setScrolled(true);
+      return;
+    }
+
     const handleScroll = () => {
       setScrolled(window.scrollY > window.innerHeight * 0.2);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

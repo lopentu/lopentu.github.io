@@ -4,14 +4,11 @@ import {
   Card,
   Text,
   Title,
-  Modal,
   Badge,
   Flex,
-  Button,
 } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { client } from "../../libs/client";
-import NewsModal from "../components/NewsModal";
 
 type NewsItem = {
   id: string;
@@ -22,17 +19,14 @@ type NewsItem = {
   content: string;
 };
 
-export default function News() {
+export default function NewsArchive() {
   const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
-  const [opened, setOpened] = useState(false);
-  const [currentNews, setCurrentNews] = useState<NewsItem | null>(null);
 
   useEffect(() => {
     async function fetchNews() {
       try {
         const data = await client.get({
           endpoint: "news",
-          queries: { limit: 4 },
         });
         setNewsItems(data.contents);
       } catch (error) {
@@ -50,13 +44,13 @@ export default function News() {
 
   return (
     <Container style={{ marginTop: "40px", marginBottom: "40px" }}>
-      <Title order={1} align="center" m={"xl"}>
-        最新消息
+      <Title order={1} mt={80} mb={"md"}>
+        歷史消息
       </Title>
 
       <Grid gutter="lg">
         {newsItems.map((item) => (
-          <Grid.Col key={item.id} span={{ base: 12, sm: 6 }}>
+          <Grid.Col key={item.id} span={{ base: 12, sm: 12 }}>
             <Card
               shadow="sm"
               padding="lg"
@@ -85,23 +79,6 @@ export default function News() {
           </Grid.Col>
         ))}
       </Grid>
-      <Flex justify="center" mt={"lg"}>
-        <Button
-          href="/news"
-          component="a"
-          variant="light"
-          color="blue"
-          w={300}
-        >
-          查看更多
-        </Button>
-      </Flex>
-
-      <NewsModal
-        opened={opened}
-        onClose={() => setOpened(false)}
-        newsItem={currentNews}
-      />
     </Container>
   );
 }
