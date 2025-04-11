@@ -85,7 +85,7 @@ export default function News() {
           </Grid.Col>
         ))}
       </Grid>
-      <Flex justify="center" mt={"lg"}>
+      {/* <Flex justify="center" mt={"lg"}>
         <Button
           href="/news"
           component="a"
@@ -95,7 +95,7 @@ export default function News() {
         >
           查看更多
         </Button>
-      </Flex>
+      </Flex> */}
 
       <NewsModal
         opened={opened}
