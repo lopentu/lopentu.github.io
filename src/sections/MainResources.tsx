@@ -7,6 +7,7 @@ import ptt_corp from "../assets/images/resources/main_resources/ptt_corp.png";
 import chi_var from "../assets/images/resources/main_resources/chi-var.png";
 import lopotator from "../assets/images/resources/main_resources/lopotator.png";
 import cwm from "../assets/images/resources/main_resources/cwm.png";
+import semcor from "../assets/images/resources/main_resources/SemCor.png";
 
 type Resource = {
   title: string;
@@ -24,7 +25,8 @@ export default function MainResources() {
     ptt_corp,
     chi_var,
     lopotator,
-    cwm
+    cwm,
+    semcor
   };
 
   useEffect(() => {

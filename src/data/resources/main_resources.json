@@ -16,5 +16,11 @@
     "description": "SoMe 為收錄了 PTT 和 Dcard 兩大論壇的語料庫。作為一個台灣特有的 BBS 系統，PTT 記錄了珍貴而有趣的社會語言文化現象。提供了語言接觸與演化和「精簡語言學」重要的經驗訊息。",
     "image": "ptt_corp",
     "link": "http://140.112.147.132/"
+  },
+  {
+    "title": "Chinese Wordnet SemCor", 
+    "description": "SemCor 是為了處理中文詞語的語義歧義消解（WSD）任務而設計的資料集，特別聚焦於 Chinese Wordnet（CWN）2.0 中具有超過 10 種語義的詞。",
+    "image": "semcor",
+    "link": "https://huggingface.co/datasets/lopentu/Chinese-Wordnet-SemCor"
   }
 ]
