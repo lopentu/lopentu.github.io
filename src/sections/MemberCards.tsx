@@ -78,7 +78,7 @@ export default function MemberCards() {
                 h={160}
               />
             </Card.Section>
-            <Group position="apart" mt={10} style={{ alignItems: "center" }}>
+            <Group justify="space-between" mt={10} style={{ alignItems: "center" }} wrap="nowrap">
               <Text size="lg" >
                 {member.name}
               </Text>
@@ -88,7 +88,7 @@ export default function MemberCards() {
                   color="blue"
                   variant="light"
                 >
-                  {member.grade}
+                  {member.grade.substring(0, 1)}
                 </Badge>
               </Center>
             </Group>
@@ -96,7 +96,7 @@ export default function MemberCards() {
               {member.researchField}
             </Text>
 
-            <Group position="apart">
+            <Group justify="space-between">
               <ActionIcon
                 component="a"
                 href={`mailto:${member.email}`}
@@ -104,7 +104,7 @@ export default function MemberCards() {
                 color="green"
                 aria-label="Email"
                 radius="xl"
-                style={{ width: 40, height: 40 }}
+                style={{ width: 30, height: 30 }}
               >
                 <IconMail
                   style={{ width: "70%", height: "70%" }}
@@ -119,7 +119,7 @@ export default function MemberCards() {
                 color="blue"
                 aria-label="site"
                 radius="xl"
-                style={{ width: 40, height: 40 }}
+                style={{ width: 30, height: 30 }}
               >
                 <IconLink
                   style={{ width: "70%", height: "70%" }}
