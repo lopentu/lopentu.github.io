@@ -1,0 +1,25 @@
+# Ignore node_modules, as dependencies will be installed in the Docker image
+node_modules
+
+# Ignore build output
+dist
+
+# Ignore Docker files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Ignore Git files
+.git
+.gitignore
+
+# Ignore development environment files
+.env
+
+# Ignore IDE/editor specific files
+.vscode/
+.idea/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
