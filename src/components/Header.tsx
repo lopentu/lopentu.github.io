@@ -27,7 +27,7 @@ export default function Header() {
 
   return (
     <AppShell.Header className={scrolled ? "header scrolled" : "header"}>
-      <Group position="apart">
+      <Group justify="space-between">
         <Image
           src={logoLope}
           alt="Logo"
