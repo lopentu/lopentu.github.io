@@ -42,7 +42,7 @@ export default function MainResources() {
     <Grid gutter="lg">
       {resources.map((resource, index) => (
         <Grid.Col span={{ base: 12, sm: 6, md: 4 }} key={index}>
-          <Card shadow="sm" padding="lg" radius="md" withBorder>
+          <Card shadow="sm" padding="lg" radius="md" withBorder style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
             <Card.Section>
               <Image
                 src={imageMap[resource.image]} 
@@ -58,7 +58,7 @@ export default function MainResources() {
             >
               {resource.title}
             </Text>
-            <Text size="sm" c="dimmed" style={{ marginBottom: "1em" }}>
+            <Text size="sm" c="dimmed" style={{ marginBottom: "1em", flexGrow: 1 }}>
               {resource.description}
             </Text>
             <Button

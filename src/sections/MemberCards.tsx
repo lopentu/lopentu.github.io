@@ -70,7 +70,7 @@ export default function MemberCards() {
     <Grid gutter="lg">
       {members.map((member, index) => (
         <Grid.Col key={index} span={{ base: 12, sm: 6, md: 3 }}>
-          <Card shadow="sm" padding="lg" radius="md" withBorder>
+          <Card shadow="sm" padding="lg" radius="md" withBorder style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
             <Card.Section>
               <Image
                 src={imageMap[member.image]}
@@ -92,7 +92,7 @@ export default function MemberCards() {
                 </Badge>
               </Center>
             </Group>
-            <Text size="sm" c="dimmed" style={{ marginBottom: "20px" }}>
+            <Text size="sm" c="dimmed" style={{ marginBottom: "1em", flexGrow: 1}}>
               {member.researchField}
             </Text>
 

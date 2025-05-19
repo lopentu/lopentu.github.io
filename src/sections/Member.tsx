@@ -7,8 +7,8 @@ import ProfessorInfo from "./ProfessorInfo";
 
 export default function Member() {
   return (
-    <Container style={{ marginTop: "40px", marginBottom: "40px" }}>
-      <Title order={1} align="center" m={"xl"}>
+    <Container style={{ marginTop: "1em", marginBottom: "1em" }}>
+      <Title order={1} ta="center" m={"xl"}>
         成員
       </Title>
 
