@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { AppShell, Group, Anchor, Image } from "@mantine/core";
 import { useLocation } from "react-router-dom";
 import logoLope from "../assets/images/header/logo_lope.jpg";
-import "../app.css";
+import "../App.css";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
