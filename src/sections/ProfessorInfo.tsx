@@ -9,10 +9,6 @@ const ProfessorInfo = () => {
   const [data, setData] = useState([]);
   const isMobile = useMediaQuery("(max-width: 768px)");
 
-  const imageMap = {
-    shukai,
-  };
-
   useEffect(() => {
     async function fetchProfessorData() {
       const data = await import("../data/member/professor.json");
@@ -34,7 +30,7 @@ const ProfessorInfo = () => {
       }}
     >
       {data.map((professor, index) => (
-        <Group mb={40}>
+        <Group key={index} mb={40}>
           <div
             key={index}
             style={{ display: "flex", alignItems: "flex-start", gap: "20px" }}
