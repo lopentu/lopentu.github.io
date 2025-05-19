@@ -41,7 +41,7 @@ export default function MainResources() {
   return (
     <Grid gutter="lg">
       {resources.map((resource, index) => (
-        <Grid.Col key={index} span={{ base: 12, sm: 6, md: 4 }}>
+        <Grid.Col span={{ base: 12, sm: 6, md: 4 }} key={index}>
           <Card shadow="sm" padding="lg" radius="md" withBorder>
             <Card.Section>
               <Image
@@ -52,13 +52,13 @@ export default function MainResources() {
               />
             </Card.Section>
             <Text
-              weight={700}
+              fw={700}
               size="lg"
-              style={{ marginTop: "10px", marginBottom: "10px" }}
+              style={{ marginTop: "1em", marginBottom: "1em" }}
             >
               {resource.title}
             </Text>
-            <Text size="sm" color="dimmed" style={{ marginBottom: "20px" }}>
+            <Text size="sm" c="dimmed" style={{ marginBottom: "1em" }}>
               {resource.description}
             </Text>
             <Button
