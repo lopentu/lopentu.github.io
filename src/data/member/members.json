@@ -40,36 +40,12 @@
     "site": "https://github.com/cckk2913"
   },
   {
-    "name": "紀柔安",
-    "grade": "碩三",
-    "researchField": "計算語意學、認知語意學、資料科學",
-    "image": "joanne",
-    "email": "jajoanne.chi88@gmail.com",
-    "site": "https://github.com/lowannann"
-  },
-  {
     "name": "顏巧函",
     "grade": "碩三",
     "researchField": "計算語意學、認知語意學、社會語言學、隱喻",
     "image": "irene",
     "email": "r11142008@ntu.edu.tw",
     "site": "https://github.com/typeconflict"
-  },
-  {
-    "name": "橘内每歌",
-    "grade": "碩三",
-    "researchField": "計算語言學、語料庫語言學、大型語言模型",
-    "image": "micah",
-    "email": "r11142010@ntu.edu.tw",
-    "site": "https://github.com/muoegu"
-  },
-  {
-    "name": "Deborah Watty",
-    "grade": "碩三",
-    "researchField": "計算語意學",
-    "image": "deborah",
-    "email": "r11142012@ntu.edu.tw",
-    "site": "https://github.com/deborahwatty"
   },
   {
     "name": "林司琪",
@@ -110,5 +86,29 @@
     "image": "zhihan",
     "email": "",
     "site": ""
+  },
+  {
+    "name": "曾冠瑜",
+    "grade": "碩一",
+    "researchField": "計算語言學、語意學",
+    "image": "bruce",
+    "email": "bbrr.uu99@gmail.com",
+    "site": ""
+  },
+  {
+    "name": "王煜頡",
+    "grade": "碩一",
+    "researchField": "計算語言學",
+    "image": "yuchieh",
+    "email": "andy92010111@gmail.com",
+    "site": ""
+  },
+  {
+    "name": "葉朗敬",
+    "grade": "碩一",
+    "researchField": "計算語言學",
+    "image": "tyler",
+    "email": "tylerlcyeh@gmail.com",
+    "site": "https://github.com/confusedkernel"
   }
 ] 

@@ -16,16 +16,15 @@ import bk from "../assets/images/member/bk.png";
 import richard from "../assets/images/member/richard.png";
 import linda from "../assets/images/member/linda.png";
 import pin_er from "../assets/images/member/pin-er.png";
-import joanne from "../assets/images/member/joanne.png";
-import mia from "../assets/images/member/mia.png";
 import irene from "../assets/images/member/irene.png";
-import micah from "../assets/images/member/micah.png";
-import deborah from "../assets/images/member/deborah.png";
 import andy from "../assets/images/member/andy.png";
 import rick from "../assets/images/member/rick.png";
 import yuxuan from "../assets/images/member/yuxuan.png";
 import zhihan from "../assets/images/member/zhihan.png";
 import amanda from "../assets/images/member/amanda.png";
+import bruce from "../assets/images/member/bruce.png";
+import tyler from "../assets/images/member/tyler.png";
+import yuchieh from "../assets/images/member/yuchieh.png";
 
 type Member = {
   name: string;
@@ -45,16 +44,15 @@ export default function MemberCards() {
     richard,
     linda,
     pin_er,
-    joanne,
-    mia,
     irene,
-    micah,
-    deborah,
     andy,
     rick,
     yuxuan,
     zhihan,
     amanda,
+    bruce,
+    tyler,
+    yuchieh,
   };
 
   useEffect(() => {
