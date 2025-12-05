@@ -25,6 +25,7 @@ import amanda from "../assets/images/member/amanda.png";
 import bruce from "../assets/images/member/bruce.png";
 import tyler from "../assets/images/member/tyler.png";
 import yuchieh from "../assets/images/member/yuchieh.png";
+import chunki from "../assets/images/member/chunki.png";
 
 type Member = {
   name: string;
@@ -53,6 +54,7 @@ export default function MemberCards() {
     bruce,
     tyler,
     yuchieh,
+    chunki
   };
 
   useEffect(() => {
