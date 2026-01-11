@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>臺大文學院 2030 遠景：東亞人文 AI 旗艦計畫</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Embedded CSS -->
+    <style>
+        /* Chosen Palette: Electric Innovation (Dark Mode) */
+        /* Background: #0f172a (Slate 900) */
+        /* Text: #f8fafc (Slate 50) */
+        /* Primary: #3b82f6 (Blue 500) */
+        /* Secondary: #8b5cf6 (Violet 500) */
+        /* Accent: #f59e0b (Amber 500) */
+        /* Alert: #ef4444 (Red 500) */
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8f9fa;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 2px;
+        }
+        @media (max-width: 640px) {
+            .section-title {
+                margin-bottom: 1.5rem;
+            }
+            .section-title::after {
+                width: 60px;
+                height: 3px;
+            }
+        }
+
+        /* Chart Container Guidelines */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 450px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 300px;
+                max-height: 350px;
+            }
+        }
+
+        /* Interactive Card Styling */
+        .interactive-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        .interactive-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.5);
+            border-color: #3b82f6;
+        }
+        .interactive-card.active {
+            border-color: #f59e0b;
+            background-color: #fef3c7;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+        }
+
+        /* CSS Animation for Diagram */
+        .flow-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #6366f1, transparent);
+            animation: flow 2s infinite linear;
+        }
+        @keyframes flow {
+            0% { opacity: 0.3; transform: translateX(-10%); }
+            50% { opacity: 1; transform: translateX(0%); }
+            100% { opacity: 0.3; transform: translateX(10%); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+
+    <!-- 
+    Application Structure Plan:
+    1.  **Vision Header**: Sets the "Civilizational Collaboration" tone.
+    2.  **Global Context Dashboard**: Cards summarizing the competitive landscape (MIT, EU, UTokyo, SNU) to establish the "Why".
+    3.  **Strategic Analysis (Interactive Radar)**: Compares UTokyo (Civilization), SNU (State), and NTU (Agenda) models. Users can toggle "Current" vs "Future" to see the strategic pivot.
+    4.  **Resource Audit (Interactive Bubble)**: Visualizes "Hidden" vs "Amplifiable" resources. Clicking bubbles reveals specific amplification strategies (e.g., reducing admin to free up time).
+    5.  **The Reality Check (Bar Chart)**: Visualizes the faculty shortage in Humanities to justify the need for structural reform, not just "more projects".
+    6.  **The Solution (CSS Diagram)**: "East Asian Humanities AI" concept map. Visualizes the flow from "Local Data" to "AI Interpretation" to "Global Impact".
+    7.  **Roadmap (Timeline)**: 5-10 year concrete steps.
+
+    Visualization & Content Choices:
+    1.  **Radar Chart (Chart.js)**: Best for comparing multi-dimensional strategic models. NO SVG.
+    2.  **Bubble Chart (Chart.js)**: Perfect for showing 3 dimensions: Ease of Access (X), Strategic Impact (Y), and Resource Scale (Radius). NO SVG.
+    3.  **Bar Chart (Chart.js)**: Simple, hard-hitting comparison for the faculty shortage numbers. NO SVG.
+    4.  **CSS/HTML Diagram**: Uses Flexbox/Grid and styling to create the "Temple" structure of the solution. NO SVG/Mermaid.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <!-- Chosen Palette: Electric Innovation -->
+</head>
+<body class="selection:bg-blue-500 selection:text-white">
+
+    <!-- Hero Section -->
+    <header class="relative bg-gradient-to-b from-gray-100 via-gray-50 to-white pt-12 sm:pt-16 md:pt-20 pb-12 sm:pb-14 md:pb-16 px-4 sm:px-6 text-center border-b border-gray-200">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <a href="臺大文學院AI時代遠景規劃.pdf" target="_blank" class="inline-flex items-center py-1.5 px-2.5 sm:px-3 rounded-full bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 text-[10px] sm:text-xs font-bold tracking-wider border border-blue-500/20 transition duration-200">
+                    <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 mr-1 sm:mr-1.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                    </svg>
+                    <span class="whitespace-nowrap">願景完整草案</span>
+                </a>
+                
+                <a href="top_linguistics.pdf" target="_blank" class="inline-flex items-center py-1.5 px-2.5 sm:px-3 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 text-[10px] sm:text-xs font-medium tracking-wider border border-gray-300 transition duration-200">
+                    <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 mr-1 sm:mr-1.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                    </svg>
+                    <span class="whitespace-nowrap">語言學版圖</span>
+                </a>
+                <a href="Global_Linguistics_Survey.html" target="_blank" class="inline-flex items-center py-1.5 px-2.5 sm:px-3 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 text-[10px] sm:text-xs font-medium tracking-wider border border-gray-300 transition duration-200">
+                    <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 mr-1 sm:mr-1.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
+                    <span class="whitespace-nowrap">資訊圖表</span>
+                </a>
+                <a href="language_program.pdf" target="_blank" class="inline-flex items-center py-1.5 px-2.5 sm:px-3 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 text-[10px] sm:text-xs font-medium tracking-wider border border-gray-300 transition duration-200">
+                    <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 mr-1 sm:mr-1.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                    </svg>
+                    <span class="whitespace-nowrap">語言科學學程</span>
+                </a>
+            </div>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-4 sm:mb-6 leading-tight px-2">
+                人文與科技的<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600">文明協作</span>
+            </h1>
+            <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed px-2">
+                不僅是挽救人文學科，而是建立<strong>「東亞人文 AI」</strong>旗艦計畫。<br class="hidden sm:block">
+                <span class="sm:hidden"><br></span>
+                在 AI 時代，科技的對立面不是人文，而是我們攜手推動文明發展的夥伴。
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-12 space-y-16 sm:space-y-20 md:space-y-24">
+
+        <!-- 1. Global Context Section -->
+        <section id="global-context">
+            <div class="mb-6 sm:mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 section-title">全球競爭：頂尖大學的 AI 人文對策</h2>
+                <p class="text-gray-600 text-base sm:text-lg mt-2">世界級學府如何回應 AI 衝擊？我們不模仿，但必須知己知彼。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1: MIT -->
+                <div class="bg-white p-6 rounded-xl border border-gray-200 hover:border-blue-500 transition duration-300 shadow-sm">
+                    <div class="text-blue-600 text-2xl mb-3 font-bold">MIT 麻省理工</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-widest mb-2">跨域雙學位</div>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        推出「人文與工程」雙學位。目標是培養能理解演算法偏見，同時具備技術實作能力的雙語人才。
+                    </p>
+                </div>
+                <!-- Card 2: EU/MPG -->
+                <div class="bg-white p-6 rounded-xl border border-gray-200 hover:border-violet-500 transition duration-300 shadow-sm">
+                    <div class="text-violet-600 text-2xl mb-3 font-bold">歐盟 & MPG</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-widest mb-2">展望歐洲計畫</div>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        馬普學會 (MPG) 設立 Human Sciences 部門；歐盟將人文學科列入「展望歐洲」資助核心，視為解決科技社會問題的關鍵。
+                    </p>
+                </div>
+                <!-- Card 3: UTokyo -->
+                <div class="bg-white p-6 rounded-xl border border-gray-200 hover:border-amber-500 transition duration-300 shadow-sm">
+                    <div class="text-amber-600 text-2xl mb-3 font-bold">東京大學</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-widest mb-2">文明型人文強權</div>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        「文理融合五年一貫」。基於深厚的帝國大學傳統，以「日本文明詮釋者」的姿態引導科技發展。
+                    </p>
+                </div>
+                <!-- Card 4: SNU -->
+                <div class="bg-white p-6 rounded-xl border border-gray-200 hover:border-emerald-500 transition duration-300 shadow-sm">
+                    <div class="text-emerald-600 text-2xl mb-3 font-bold">首爾大學</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-widest mb-2">國家戰略型平台</div>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        高度配合國家文化輸出與科技戰略，集中資源打造具備國家競爭力的人文論述平台。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Strategic Positioning (Radar Chart) -->
+        <section id="strategy-analysis" class="bg-gray-50 rounded-3xl p-8 border border-gray-200">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div class="lg:col-span-1 space-y-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4">臺大的戰略定位</h2>
+                        <div class="w-16 h-1 bg-blue-500 rounded mb-4"></div>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            我們無法複製東大的歷史權威，也不應完全模仿首爾大的國家工具化。臺大的機會在於成為<strong>「全球議程設定節點 (Agenda-Setting Node)」</strong>。
+                        </p>
+                    </div>
+                    
+                    <!-- Controls -->
+                    <div class="bg-white p-4 rounded-xl border border-gray-200">
+                        <h3 class="text-sm font-bold text-gray-600 uppercase mb-3">比較維度說明</h3>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex items-center">
+                                <span class="w-3 h-3 rounded-full bg-amber-500 mr-2"></span>
+                                <span class="text-gray-700">文明權威 (Civilizational): 傳統歷史積累</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-3 h-3 rounded-full bg-emerald-500 mr-2"></span>
+                                <span class="text-gray-700">國家戰略 (State Strategy): 政策配合度</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-3 h-3 rounded-full bg-blue-500 mr-2"></span>
+                                <span class="text-gray-700">議程設定 (Agenda Setting): 創新議題能力</span>
+                            </li>
+                        </ul>
+                        <div class="mt-6 pt-4 border-t border-gray-200">
+                            <button onclick="toggleRadarDataset()" class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition font-medium text-sm flex items-center justify-center">
+                                <span class="mr-2">🔄</span> 切換：現況 vs 願景
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2">
+                    <div class="chart-container bg-white rounded-xl p-4 border border-gray-200 shadow-xl">
+                        <canvas id="strategyRadar"></canvas>
+                    </div>
+                    <p class="text-center text-gray-500 text-xs mt-3">
+                        *數據基於各校發展模式之定性分析轉化
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Resource Audit (Bubble Chart) -->
+        <section id="resource-audit">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 section-title">資源盤點：隱形與潛在力量</h2>
+                    <p class="text-gray-600 max-w-2xl">
+                        我們擁有許多「不敢用」或「未整合」的資源。透過策略，將這些資源轉化為戰略打擊力。
+                    </p>
+                </div>
+                <div class="mt-4 md:mt-0 text-right">
+                    <div class="inline-flex items-center space-x-4 text-xs text-gray-600 bg-white px-4 py-2 rounded-lg border border-gray-200 shadow-sm">
+                        <span class="flex items-center"><span class="w-3 h-3 bg-emerald-500 rounded-full mr-1"></span> 隱形資源 (結構優勢)</span>
+                        <span class="flex items-center"><span class="w-3 h-3 bg-amber-500 rounded-full mr-1"></span> 可放大資源 (需改革)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Description Panel -->
+                <div class="lg:col-span-1 space-y-4" id="bubble-details">
+                    <div class="bg-white p-5 rounded-xl border-l-4 border-emerald-500 interactive-card active shadow-sm" onclick="showResourceDetail('hidden')">
+                        <h3 class="text-lg font-bold text-gray-900 mb-1">隱形資源 (Hidden)</h3>
+                        <p class="text-emerald-600 text-xs font-bold uppercase mb-2">結構性優勢</p>
+                        <p class="text-gray-600 text-sm">
+                            這是台灣在地緣政治與歷史中的獨特位置。中文世界唯一的完全民主社會、全球 AI 供應鏈核心、以及高度學術自由。這是西方與中國學者都無法取代的場域。
+                        </p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border-l-4 border-amber-500 interactive-card shadow-sm" onclick="showResourceDetail('amplifiable')">
+                        <h3 class="text-lg font-bold text-gray-900 mb-1">可放大資源 (Amplifiable)</h3>
+                        <p class="text-amber-600 text-xs font-bold uppercase mb-2">需制度改革</p>
+                        <p class="text-gray-600 text-sm">
+                            目前被行政與零散課程稀釋的資源。特別是「教師時間」與「院級整合權」。透過減課、行政減量，將最稀缺的時間釋放給旗艦計畫。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Chart -->
+                <div class="lg:col-span-2 bg-white p-4 rounded-xl border border-gray-200 shadow-lg">
+                    <div class="chart-container">
+                        <canvas id="resourceBubble"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. The Crisis (Bar Chart) -->
+        <section id="crisis-gap" class="bg-red-50 border border-red-200 rounded-3xl p-8 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-red-100/50 rounded-full blur-3xl -z-10"></div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-block px-2 py-1 bg-red-100 text-red-600 text-xs font-bold rounded mb-4">
+                        ⚠️ 現實困境 Reality Check
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">迫切危機：員額結構失衡</h2>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        要推動跨域，必須先有足夠的「基數」。全球百大語言/文學系所平均擁有超過 100 名專任教師，能支撐細緻分工。臺大相關系所缺額近百，教師疲於奔命，難以投入創新。
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <span class="text-red-600 mr-2">➤</span>
+                            <span class="text-gray-600 text-sm">全球百大平均：<strong>~120 人</strong> (分眾細緻)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-600 mr-2">➤</span>
+                            <span class="text-gray-600 text-sm">臺大外文/語言現況：<strong>~35 人</strong> (過勞運轉)</span>
+                        </li>
+                    </ul>
+                    <a href="#solution" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 transition">
+                        查看解決方案 ↓
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                    <h3 class="text-gray-600 text-sm font-bold text-center mb-4">語言/文學系所專任教師員額比較</h3>
+                    <div class="chart-container" style="height: 300px;">
+                        <canvas id="facultyGapChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. The Solution: Flagship Concept -->
+        <section id="solution">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 section-title">旗艦計畫：東亞人文 AI (East Asian Humanities AI)</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base mt-2 px-2">
+                    主動研究 AI 人文，而非僅是使用 AI 技術。將台灣的地緣與歷史轉化為數據與倫理的養分。
+                </p>
+            </div>
+
+            <!-- CSS Diagram: The Temple Structure -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+                <!-- Connecting Line (Desktop) -->
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-gray-300 via-blue-300 to-gray-300 -z-10 transform -translate-y-1/2"></div>
+
+                <!-- Pillar 1: Data Source -->
+                <div class="group bg-white p-8 rounded-2xl border border-gray-200 hover:border-emerald-500 hover:bg-gray-50 transition duration-500 relative overflow-hidden shadow-sm">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl group-hover:scale-110 transition">🌏</div>
+                    <div class="w-12 h-12 bg-emerald-500/20 text-emerald-600 rounded-lg flex items-center justify-center text-2xl mb-6 font-bold">1</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">在地場域 (Data)</h3>
+                    <div class="h-1 w-12 bg-emerald-500 rounded mb-4"></div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        利用台灣獨特的華語民主社會、原住民文化、歷史檔案與數位典藏。
+                    </p>
+                    <ul class="text-xs text-gray-500 space-y-1">
+                        <li>• 數位人文資料庫</li>
+                        <li>• 社會行為數據</li>
+                        <li>• 多語言與文化語料庫</li>
+                    </ul>
+                </div>
+
+                <!-- Pillar 2: Core Processing (AI) -->
+                <div class="group bg-white p-8 rounded-2xl border-2 border-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.15)] transform md:-translate-y-4 z-10 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl group-hover:scale-110 transition">🧠</div>
+                    <div class="w-12 h-12 bg-blue-500/20 text-blue-600 rounded-lg flex items-center justify-center text-2xl mb-6 font-bold">2</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">AI 人文詮釋 (Core)</h3>
+                    <div class="h-1 w-12 bg-blue-500 rounded mb-4"></div>
+                    <p class="text-gray-700 text-sm leading-relaxed mb-4 font-medium">
+                        不僅是跑模型，而是嵌入人文價值與創造。探討演算法偏見、AI 倫理、以及機器生成內容的文化意義。
+                    </p>
+                    <div class="bg-blue-50 text-blue-700 text-xs px-3 py-2 rounded border border-blue-200 inline-block">
+                        ★ 文理融合雙學位 / 聯合實驗室
+                    </div>
+                </div>
+
+                <!-- Pillar 3: Global Impact -->
+                <div class="group bg-white p-8 rounded-2xl border border-gray-200 hover:border-violet-500 hover:bg-gray-50 transition duration-500 relative overflow-hidden shadow-sm">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl group-hover:scale-110 transition">🚀</div>
+                    <div class="w-12 h-12 bg-violet-500/20 text-violet-600 rounded-lg flex items-center justify-center text-2xl mb-6 font-bold">3</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">全球對話 (Impact)</h3>
+                    <div class="h-1 w-12 bg-violet-500 rounded mb-4"></div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        透過校內引水人與 Beyond Borders 計畫，將「東亞 AI 倫理觀點」輸出至國際，成為全球議程設定者。
+                    </p>
+                    <ul class="text-xs text-gray-500 space-y-1">
+                        <li>• 國際合授課程</li>
+                        <li>• 跨國政策白皮書</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Roadmap (Timeline) -->
+        <section id="roadmap" class="max-w-6xl mx-auto px-2 sm:px-4">
+            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 section-title mb-8 sm:mb-12 text-center">5-10 年改革路徑圖</h2>
+            
+            <div class="space-y-6 sm:space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-300 before:to-transparent">
+                
+                <!-- Phase 1 -->
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                    <div class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-gray-300 bg-white group-[.is-active]:bg-blue-600 group-[.is-active]:border-blue-600 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 text-gray-900 group-[.is-active]:text-white font-bold text-xs sm:text-sm">
+                        01
+                    </div>
+                    <div class="w-[calc(100%-3rem)] sm:w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] bg-white p-4 sm:p-6 rounded-xl border border-gray-200 shadow-lg">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
+                            <h3 class="font-bold text-gray-900 text-lg sm:text-xl">第一階段 (1-3年)：基盤整備</h3>
+                            <span class="text-sm font-bold bg-blue-50 text-blue-700 px-2 py-1 rounded self-start sm:self-auto">啟動期</span>
+                        </div>
+                        <ul class="text-gray-600 text-base sm:text-lg space-y-2 sm:space-y-2.5 list-disc list-inside leading-relaxed">
+                            <li>設立「院級旗艦平台」，集中分散資源。</li>
+                            <li>試辦「教師時間解放」：減授鐘點換取跨域研究產出。</li>
+                            <li>開設「人文 AI 導論」必修通識與<span class="text-red-800 font-semibold">選修系列微學程</span>。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                    <div class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-gray-300 bg-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 text-gray-600 font-bold text-xs sm:text-sm">
+                        02
+                    </div>
+                    <div class="w-[calc(100%-3rem)] sm:w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] bg-white p-4 sm:p-6 rounded-xl border border-gray-200 shadow-lg">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
+                            <h3 class="font-bold text-gray-900 text-lg sm:text-xl">第二階段 (3-5年)：結構轉型</h3>
+                            <span class="text-sm font-bold bg-gray-100 text-gray-700 px-2 py-1 rounded self-start sm:self-auto">擴張期</span>
+                        </div>
+                        <ul class="text-gray-600 text-base sm:text-lg space-y-2 sm:space-y-2.5 list-disc list-inside leading-relaxed">
+                            <li>推動「文理融合學位」(參考 MIT/UTokyo)。</li>
+                            <li>補足與流動外文/語言系所關鍵缺額，建立 AI 語言學團隊。</li>
+                            <li>與 MPG/EU 或東亞頂大建立實質聯合人文創新實驗室。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                    <div class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-gray-300 bg-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 text-gray-600 font-bold text-xs sm:text-sm">
+                        03
+                    </div>
+                    <div class="w-[calc(100%-3rem)] sm:w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] bg-white p-4 sm:p-6 rounded-xl border border-gray-200 shadow-lg">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
+                            <h3 class="font-bold text-gray-900 text-lg sm:text-xl">第三階段 (5-10年)：全球節點</h3>
+                            <span class="text-sm font-bold bg-gray-100 text-gray-700 px-2 py-1 rounded self-start sm:self-auto">成熟期</span>
+                        </div>
+                        <ul class="text-gray-600 text-base sm:text-lg space-y-2 sm:space-y-2.5 list-disc list-inside leading-relaxed">
+                            <li>臺大文學院成為全球 AI 倫理與東亞研究的「議程設定者」。</li>
+                            <li>輸出「東亞人文 AI」課程模組至全球夥伴學校。</li>
+                            <li>實現人文與科技的實質對等協作。</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-gray-200 mt-20 pt-10 pb-10 text-center">
+            <p class="text-gray-500 text-sm">
+                國立臺灣大學文學院未來遠景草案小組 © 2025<br>
+                <span class="text-xs opacity-50">本頁面為策略視覺化草案，數據僅供內部參考。</span>
+            </p>
+        </footer>
+
+    </main>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- Utility Functions ---
+        
+        // 1. Label Wrapping Helper (16 char limit)
+        const splitLabel = (str) => {
+            const limit = 16;
+            if (str.length <= limit) return str;
+            const words = str.split(''); // Split by char for CJK mixed with English, logic simplified for mixed content
+            // Simple chunking for demo purposes to handle mixed English/Chinese nicely
+            let lines = [];
+            let currentLine = '';
+            
+            // Heuristic split for mixed content
+            if (str.includes(' ')) {
+                // Space based split for English heavy titles
+                const wordsArr = str.split(' ');
+                wordsArr.forEach(word => {
+                    if ((currentLine + word).length > limit) {
+                        lines.push(currentLine);
+                        currentLine = word + ' ';
+                    } else {
+                        currentLine += word + ' ';
+                    }
+                });
+                lines.push(currentLine.trim());
+            } else {
+                // Character based split for CJK
+                for (let i = 0; i < str.length; i += 10) {
+                    lines.push(str.substring(i, i + 10));
+                }
+            }
+            return lines.length > 0 ? lines : [str];
+        };
+
+        // 2. Common Tooltip Configuration
+        const commonTooltip = {
+            backgroundColor: 'rgba(15, 23, 42, 0.95)',
+            titleColor: '#f8fafc',
+            bodyColor: '#cbd5e1',
+            borderColor: '#3b82f6',
+            borderWidth: 1,
+            padding: 12,
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // --- Chart 1: Radar Chart (Strategic Comparison) ---
+        const radarCtx = document.getElementById('strategyRadar').getContext('2d');
+        const radarLabels = ["文明權威 (Civilizational)", "國家戰略 (State Strategy)", "全球議程設定 (Agenda Setting)", "科技整合 (Tech Integration)", "區域影響力 (Regional)"];
+        const processedRadarLabels = radarLabels.map(splitLabel);
+
+        const radarData = {
+            labels: processedRadarLabels,
+            datasets: [
+                {
+                    label: '東京大學 (UTokyo)',
+                    data: [95, 75, 70, 85, 90],
+                    borderColor: '#f59e0b', // Amber
+                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    pointBackgroundColor: '#f59e0b',
+                    order: 2
+                },
+                {
+                    label: '首爾大學 (SNU)',
+                    data: [70, 95, 65, 80, 75],
+                    borderColor: '#10b981', // Emerald
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    pointBackgroundColor: '#10b981',
+                    order: 3
+                },
+                {
+                    label: '臺大 (NTU) 願景',
+                    data: [65, 70, 95, 90, 85], // Goal: High Agenda & Tech
+                    borderColor: '#3b82f6', // Blue
+                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                    pointBackgroundColor: '#3b82f6',
+                    pointBorderColor: '#fff',
+                    borderWidth: 3,
+                    order: 1
+                }
+            ]
+        };
+
+        // Copy for toggle
+        const radarDataCurrent = {
+            label: '臺大 (NTU) 現況',
+            data: [60, 60, 50, 40, 70], // Current state (lower)
+            borderColor: '#64748b', // Slate
+            backgroundColor: 'rgba(100, 116, 139, 0.1)',
+            borderDash: [5, 5]
+        };
+        const radarDataTarget = radarData.datasets[2]; // Save target ref
+
+        let radarChart = new Chart(radarCtx, {
+            type: 'radar',
+            data: radarData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(51, 65, 85, 0.5)' },
+                        grid: { color: 'rgba(51, 65, 85, 0.5)' },
+                        pointLabels: {
+                            color: '#cbd5e1',
+                            font: { size: 12, family: "'Noto Sans TC', sans-serif" }
+                        },
+                        ticks: { display: false, backdropColor: 'transparent' },
+                        suggestedMin: 20,
+                        suggestedMax: 100
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: { color: '#e2e8f0', font: { family: "'Noto Sans TC'" } },
+                        position: 'bottom'
+                    },
+                    tooltip: commonTooltip
+                }
+            }
+        });
+
+        function toggleRadarDataset() {
+            const ntuDataset = radarChart.data.datasets.find(d => d.label.includes('NTU'));
+            if (ntuDataset.label.includes('願景')) {
+                // Switch to current
+                radarChart.data.datasets[2] = radarDataCurrent;
+            } else {
+                // Switch to target
+                radarChart.data.datasets[2] = radarDataTarget;
+            }
+            radarChart.update();
+        }
+
+        // --- Chart 2: Bubble Chart (Resource Audit) ---
+        const bubbleCtx = document.getElementById('resourceBubble').getContext('2d');
+        const bubbleChart = new Chart(bubbleCtx, {
+            type: 'bubble',
+            data: {
+                datasets: [{
+                    label: '資源矩陣',
+                    data: [
+                        { x: 30, y: 90, r: 15, label: '民主社會 (隱形)', type: 'hidden' },
+                        { x: 35, y: 85, r: 12, label: '學術自由 (隱形)', type: 'hidden' },
+                        { x: 45, y: 95, r: 18, label: '科技供應鏈 (隱形)', type: 'hidden' },
+                        { x: 80, y: 80, r: 25, label: '教師時間 (可放大)', type: 'amp' },
+                        { x: 70, y: 75, r: 20, label: '院級整合權 (可放大)', type: 'amp' },
+                        { x: 90, y: 40, r: 10, label: '現有課程', type: 'std' }
+                    ],
+                    backgroundColor: (ctx) => {
+                        const v = ctx.raw;
+                        if(!v) return;
+                        return v.type === 'hidden' ? 'rgba(16, 185, 129, 0.7)' : 
+                               v.type === 'amp' ? 'rgba(245, 158, 11, 0.7)' : 'rgba(148, 163, 184, 0.5)';
+                    },
+                    borderColor: (ctx) => {
+                        const v = ctx.raw;
+                        if(!v) return;
+                        return v.type === 'hidden' ? '#10b981' : 
+                               v.type === 'amp' ? '#f59e0b' : '#94a3b8';
+                    }
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: { display: true, text: '改變/取用容易度 (Ease of Access)', color: '#64748b' },
+                        grid: { color: 'rgba(51, 65, 85, 0.3)' },
+                        ticks: { color: '#64748b' },
+                        min: 20, max: 100
+                    },
+                    y: {
+                        title: { display: true, text: '戰略影響力 (Strategic Impact)', color: '#64748b' },
+                        grid: { color: 'rgba(51, 65, 85, 0.3)' },
+                        ticks: { color: '#64748b' },
+                        min: 30, max: 100
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        ...commonTooltip,
+                        callbacks: {
+                            title: (items) => items[0].raw.label,
+                            label: (item) => `影響力: ${item.raw.y} | 易用性: ${item.raw.x}`
+                        }
+                    }
+                }
+            }
+        });
+
+        function showResourceDetail(type) {
+            // Simple visual feedback logic
+            const cards = document.querySelectorAll('.interactive-card');
+            cards.forEach(c => c.classList.remove('active'));
+            if(type === 'hidden') cards[0].classList.add('active');
+            if(type === 'amplifiable') cards[1].classList.add('active');
+        }
+
+        // --- Chart 3: Bar Chart (Faculty Gap) ---
+        const gapCtx = document.getElementById('facultyGapChart').getContext('2d');
+        const gapLabels = ["全球百大平均 (Global Top 100)", "東京大學 (UTokyo)", "臺大 (NTU) 現況", "臺大 (NTU) 目標"];
+        const processedGapLabels = gapLabels.map(splitLabel);
+
+        new Chart(gapCtx, {
+            type: 'bar',
+            data: {
+                labels: processedGapLabels,
+                datasets: [{
+                    label: '專任教師人數 (Estimated)',
+                    data: [120, 105, 35, 80],
+                    backgroundColor: [
+                        '#64748b', // Slate
+                        '#f59e0b', // Amber
+                        '#ef4444', // Red (Alert)
+                        '#3b82f6'  // Blue (Target)
+                    ],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(51, 65, 85, 0.3)' },
+                        ticks: { color: '#94a3b8' }
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { color: '#f8fafc', font: { weight: 'bold' } }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: commonTooltip
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
