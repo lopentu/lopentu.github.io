@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { AppShell, Group, Anchor, Image } from "@mantine/core";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import logoLope from "../assets/images/header/logo_lope.jpg";
 import "../App.css";
 
@@ -24,6 +24,8 @@ export default function Header() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+  const navigate = useNavigate();
+  
 
   return (
     <AppShell.Header className={scrolled ? "header scrolled" : "header"}>
@@ -38,19 +40,82 @@ export default function Header() {
         />
 
         <Group gap="xl">
-          <Anchor href="#news" c={"white"} underline="never" fw={500}>
+          <Anchor
+            href="/#news"
+            c={"white"}
+            underline="never"
+            fw={500}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/");
+              setTimeout(() => {
+                window.location.hash = "#news";
+              }, 150);
+            }}
+          >
             最新
           </Anchor>
-          <Anchor href="#about" c={"white"} underline="never" fw={500}>
+          <Anchor
+            href="/#about"
+            c={"white"}
+            underline="never"
+            fw={500}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/");
+              setTimeout(() => {
+                window.location.hash = "#about";
+              }, 150);
+            }}
+          >
             關於
           </Anchor>
-          <Anchor href="#resources" c={"white"} underline="never" fw={500}>
+          <Anchor
+            href="/#resources"
+            c={"white"}
+            underline="never"
+            fw={500}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/");
+              setTimeout(() => {
+                window.location.hash = "#resources";
+              }, 150);
+            }}
+          >
             資源
           </Anchor>
-          <Anchor href="#member" c={"white"} underline="never" fw={500}>
+          <Anchor
+            href="/#member"
+            c={"white"}
+            underline="never"
+            fw={500}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/");
+              setTimeout(() => {
+                window.location.hash = "#member";
+              }, 150);
+            }}
+          >
             成員
           </Anchor>
-          <Anchor href="#publications" c={"white"} underline="never" fw={500}>
+          <Anchor component={Link} to="/alumni" c={"white"} underline="never" fw={500}>
+            校友
+          </Anchor>
+          <Anchor
+            href="/#publications"
+            c={"white"}
+            underline="never"
+            fw={500}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/");
+              setTimeout(() => {
+                window.location.hash = "#publications";
+              }, 150);
+            }}
+          >
             成果
           </Anchor>
         </Group>

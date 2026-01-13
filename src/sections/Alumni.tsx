@@ -13,6 +13,11 @@ export default function Alumni() {
   const [postdocs, setPostdocs] = useState<Member[]>([]);
 
   useEffect(() => {
+    // Ensure we start at top when entering the alumni page
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, []);
+
+  useEffect(() => {
     async function fetchData() {
       const alumniData = await import("../data/alumni/alumni.json");
       setAlumni(alumniData.default);
@@ -67,10 +72,12 @@ export default function Alumni() {
 
   return (
     <>
-      <Title order={1} align="center" mt={"xl"}>
-        歷任成員
-      </Title>
-      <Container style={{ marginTop: "40px", marginBottom: "40px" }}>
+      <div style={{ paddingTop: 92 }}>
+        <Title order={1} align="center" mt={"xl"}>
+          歷任成員
+        </Title>
+      </div>
+      <Container style={{ marginTop: "24px", marginBottom: "40px" }}>
         <Title order={2} align="center" m={"xl"}>
           已畢業成員
         </Title>

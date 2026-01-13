@@ -38,9 +38,7 @@ export default function App() {
                     <div id="member">
                       <Member />
                     </div>
-                    <div id="alumni">
-                      <Alumni />
-                    </div>
+                    {/* Alumni is a separate page */}
                     <div id="publications">
                       <Publications />
                     </div>
@@ -48,7 +46,8 @@ export default function App() {
                 }
               />
               <Route path="/news" element={<NewsArchive />} />
-              <Route path="/news/:id" element={<NewsDetail />} />{" "}
+              <Route path="/news/:id" element={<NewsDetail />} />
+              <Route path="/alumni" element={<Alumni />} />
             </Routes>
           </AppShell.Main>
         </AppShell>
