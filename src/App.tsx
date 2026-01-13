@@ -45,7 +45,6 @@ export default function App() {
                       </Button>
                     </div>
 
-                    {/* Alumni is a separate page */}
                     <div id="publications">
                       <Publications />
                     </div>
