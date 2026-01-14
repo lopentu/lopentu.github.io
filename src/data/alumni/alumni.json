@@ -2,196 +2,235 @@
   {
     "englishName": "Chih-Yao Lee",
     "chineseName": "李智堯",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "中文詞彙網鏈結資料化：從桌面資料庫至適用於語意網的詞彙知識本體"
   },
   {
     "englishName": "Yu-Wen Liu",
     "chineseName": "劉郁文",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "憂鬱症線上討論言談之主題分析"
   },
   {
     "englishName": "Chan-Chiah Hsu",
     "chineseName": "許展嘉",
-    "degree": "Ph.D. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "Ph.D. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "中文的常用詞串"
   },
   {
     "englishName": "Yi-An Wu",
     "chineseName": "吳怡安",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "中文詞彙網路的詞義消歧"
   },
   {
     "englishName": "Shanon Lin",
     "chineseName": "林怡馨",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "詞表告訴了我們什麼？—以詞義及難度分級檢驗現存英文詞表"
   },
   {
     "englishName": "Yvonne Chuang",
     "chineseName": "莊茹涵",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "中文短回文立場分類"
   },
   {
     "englishName": "Nicole Peinelt",
     "chineseName": null,
-    "degree": "M.A. in Computational Linguistics and Chinese Studies, University of Trier, Germany"
+    "degree": "M.A. in Computational Linguistics and Chinese Studies, University of Trier, Germany",
+    "thesis": null
   },
   {
     "englishName": "Shu-Yen Lin",
     "chineseName": "林淑晏",
-    "degree": "Ph.D. in Linguistics, National Taiwan Normal University, Taiwan"
+    "degree": "Ph.D. in Linguistics, National Taiwan Normal University, Taiwan",
+    "thesis": "以計算語言學方法研究英文的認知基本名詞"
   },
   {
     "englishName": "Jessie Lo",
     "chineseName": "羅巧珊",
-    "degree": "M.A. in Linguistics, National Taiwan Normal University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan Normal University, Taiwan",
+    "thesis": "中文動詞上下位關係自動標記法"
   },
   {
     "englishName": "Pierre Magistry",
     "chineseName": "馬基石",
-    "degree": "Post-Doc in Linguistics, National Taiwan University, Taiwan"
+    "degree": "Post-Doc in Linguistics, National Taiwan University, Taiwan",
+    "thesis": null
   },
   {
     "englishName": "Debby Pan",
     "chineseName": "潘靜芬",
-    "degree": "M.A. in Linguistics, National Taiwan Normal University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan Normal University, Taiwan",
+    "thesis": "漢語動詞語意特指之量度:語料庫為本的計量研究"
   },
   {
     "englishName": "Vicky Lin",
     "chineseName": "林欣霓",
-    "degree": "M.A. in Linguistics, National Taiwan Normal University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan Normal University, Taiwan",
+    "thesis": "字詞辨識中個別差異之量度：個人詞彙行為之角色探究"
   },
   {
     "englishName": "Wallace Zhang",
     "chineseName": "張虔榮",
-    "degree": "M.A. in Linguistics, National Taiwan Normal University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan Normal University, Taiwan",
+    "thesis": "潛在概念分析-利用中文網路資料在向量空間模型中呈現語意關係概念知識"
   },
   {
     "englishName": "Katherine Chen",
     "chineseName": "陳美瑜",
-    "degree": "M.A. in Linguistics, National Taiwan Normal University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan Normal University, Taiwan",
+    "thesis": "中文文本作者辨識研究: 以社群網站--臉書為例"
   },
   {
     "englishName": "Tsun-Jui Liu",
     "chineseName": "劉純睿",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "批踢踢語料庫之建置與應用"
   },
   {
     "englishName": "Emily Lu",
     "chineseName": "呂珮瑜",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "中文情緒詞庫的建造與標記"
   },
   {
     "englishName": "Amber Wang",
     "chineseName": "王伯雅",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "詞彙穩定的秘密—對各語言學面向的質性與量化分析"
   },
   {
     "englishName": "Tzu-Yun Huang",
     "chineseName": "黃姿勻",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "ESemiCrowd - 中文自然語言處理的群眾外包架構"
   },
   {
     "englishName": "Chia-Chen Lee",
     "chineseName": "李佳臻",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "評價語言分析與主題擷取-網路旅遊部落格情感分析之應用"
   },
   {
     "englishName": "Hsiao-Han Wu",
     "chineseName": "吳小涵",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "以性別自然語言處理觀點分析與預測同志語言"
   },
   {
     "englishName": "Yu-Yun Chang",
     "chineseName": "張瑜芸",
-    "degree": "Ph.D. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "Ph.D. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "中文事件真實性判斷"
   },
   {
     "englishName": "Richard Lian",
     "chineseName": "連大成",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "現代漢語平行語料庫建構及其應用"
   },
   {
     "englishName": "Simon Shih",
     "chineseName": "施孟賢",
-    "degree": "Ph.D. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "Ph.D. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "具詞義區分之中文搭配詞資源建構及其應用"
   },
   {
     "englishName": "Yi-Ju Lin",
     "chineseName": "林宜儒",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "以計算與認知觀點預測分析梗圖裡的黑色幽默"
   },
   {
     "englishName": "Yolanda Chen",
     "chineseName": "陳盈瑜",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "文本意圖的多模態分析：以Instagram為例"
   },
   {
     "englishName": "Jessy Chen",
     "chineseName": "陳蓓怡",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "詞向量的語意變遷計算模型: 以「家」為例"
   },
   {
     "englishName": "Don Hung",
     "chineseName": "洪漢唐",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "建置言談與構式的電腦中介溝通語料庫工具"
   },
   {
     "englishName": "Feiyang Zhang",
     "chineseName": "張飛揚",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "古漢語雙音節化的信息論分析"
   },
   {
     "englishName": "Yongfu Liao",
     "chineseName": "廖永賦",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "文字部件為本的語料分析：一個子字詞層次的中文語料庫工具"
   },
   {
     "englishName": "Andrea Shih",
     "chineseName": "石晴方",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "漢語構式語意自動分類研究"
   },
   {
     "englishName": "Derek Liao",
     "chineseName": "廖聿鋆",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "文本主題的向量表徵模型及其多模態任務應用"
   },
   {
     "englishName": "Hsin-Yu Chou",
     "chineseName": "周昕妤",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "大型語言模型的跨模態理解：多模互動中的非語言描繪"
   },
   {
     "englishName": "Yu-Lin Chang",
     "chineseName": "張鈺琳",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "大型語言模型與知識圖譜在財經文件上之應用"
   },
   {
     "englishName": "Kai-Ching Yeh",
     "chineseName": "葉凱晴",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "中文談話中的停頓類型之語言分析"
   },
   {
     "englishName": "Jou-An Chi",
     "chineseName": "紀柔安",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "結構化與非結構化輸入於大型語言模型中之比較：以異常事件預測任務中的語意與語用預測能力評估為例"
   },
   {
     "englishName": "Micah Kitsunai",
     "chineseName": "橘內每歌",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "用於歷史中文詞義消歧的動態式少量示例提示法"
   },
   {
     "englishName": "Deborah Watty",
     "chineseName": "",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": "基於大型語言模型的外語報刊數據意見挖掘"
   },
   {
     "englishName": "Irene Yan",
     "chineseName": "顏巧函",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": null
   },
   {
     "englishName": "Amanda Lin",
     "chineseName": "林司琪",
-    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan"
+    "degree": "M.A. in Linguistics, National Taiwan University, Taiwan",
+    "thesis": null
   }
 ]
