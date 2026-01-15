@@ -5,12 +5,18 @@ type Member = {
   englishName: string;
   chineseName: string;
   degree: string;
+  thesis?: string | null;
 };
 
 export default function Alumni() {
   const [alumni, setAlumni] = useState<Member[]>([]);
   const [researchAssistants, setResearchAssistants] = useState<Member[]>([]);
   const [postdocs, setPostdocs] = useState<Member[]>([]);
+
+  useEffect(() => {
+    // Ensure we start at top when entering the alumni page
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -46,35 +52,93 @@ export default function Alumni() {
       >
         <div>
           {firstColumn.map((member, index) => (
-            <Text key={index} style={{ marginBottom: "10px" }}>
-              <strong>{member.englishName}</strong> | {member.chineseName},{" "}
-              {member.degree}
-            </Text>
+            <div key={index} style={{ marginBottom: "14px" }}>
+              <Text>
+                <strong>{member.englishName}</strong> | {member.chineseName},{" "}
+                {member.degree}
+              </Text>
+              {member.thesis ? (
+                <Text size="sm" color="dimmed" style={{ marginTop: 4 }}>
+                  {member.thesis}
+                </Text>
+              ) : null}
+            </div>
           ))}
         </div>
 
         <div>
           {secondColumn.map((member, index) => (
-            <Text key={index} style={{ marginBottom: "10px" }}>
-              <strong>{member.englishName}</strong> | {member.chineseName},{" "}
-              {member.degree}
-            </Text>
+            <div key={index} style={{ marginBottom: "14px" }}>
+              <Text>
+                <strong>{member.englishName}</strong> | {member.chineseName},{" "}
+                {member.degree}
+              </Text>
+              {member.thesis ? (
+                <Text size="sm" color="dimmed" style={{ marginTop: 4 }}>
+                  {member.thesis}
+                </Text>
+              ) : null}
+            </div>
           ))}
         </div>
       </div>
     );
   };
 
+  const renderGroupedMembers = (members: Member[]) => {
+    const phdRegex = /Ph\.?D|PhD|Doctor/i;
+    const maRegex = /M\.?A\.?|Master/i;
+
+    const phd = members.filter((m) => phdRegex.test(m.degree || ""));
+    const ma = members.filter(
+      (m) => maRegex.test(m.degree || "") && !phd.includes(m)
+    );
+    const others = members.filter((m) => !phd.includes(m) && !ma.includes(m));
+
+    return (
+      <div style={{ display: "grid", gap: 18 }}>
+        {phd.length > 0 && (
+          <div>
+            <Title order={3} align="center" m={"sm"}>
+              博士 (PhD)
+            </Title>
+            {renderMembers(phd)}
+          </div>
+        )}
+
+        {ma.length > 0 && (
+          <div>
+            <Title order={3} align="center" m={"sm"}>
+              碩士 (M.A.)
+            </Title>
+            {renderMembers(ma)}
+          </div>
+        )}
+
+        {others.length > 0 && (
+          <div>
+            <Title order={3} align="center" m={"sm"}>
+              其他
+            </Title>
+            {renderMembers(others)}
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <>
-      <Title order={1} align="center" mt={"xl"}>
-        歷任成員
-      </Title>
-      <Container style={{ marginTop: "40px", marginBottom: "40px" }}>
+      <div style={{ paddingTop: 92 }}>
+        <Title order={1} align="center" mt={"xl"}>
+          歷任成員
+        </Title>
+      </div>
+      <Container style={{ marginTop: "24px", marginBottom: "40px" }}>
         <Title order={2} align="center" m={"xl"}>
           已畢業成員
         </Title>
-        {renderMembers(alumni)}
+        {renderGroupedMembers(alumni)}
 
         <Title order={2} align="center" m={"xl"}>
           研究助理＆交換生

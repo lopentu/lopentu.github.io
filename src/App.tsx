@@ -7,9 +7,9 @@ import News from "./sections/News";
 import MainVisual from "./sections/MainVisual";
 import Alumni from "./sections/Alumni";
 import Member from "./sections/Member";
-import { AppShell, MantineProvider } from "@mantine/core";
+import { AppShell, MantineProvider, Button } from "@mantine/core";
 import Header from "./components/Header";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import NewsArchive from "./sections/NewsArchive";
 import NewsDetail from "./sections/NewsDetail";
 
@@ -38,9 +38,14 @@ export default function App() {
                     <div id="member">
                       <Member />
                     </div>
-                    <div id="alumni">
-                      <Alumni />
+
+                    <div style={{ display: "flex", justifyContent: "center", marginTop: 20 }}>
+                      <Button component={Link} to="/alumni" variant="outline">
+                        歷任成員
+                      </Button>
                     </div>
+
+                    {/* Alumni is a separate page */}
                     <div id="publications">
                       <Publications />
                     </div>
@@ -48,7 +53,8 @@ export default function App() {
                 }
               />
               <Route path="/news" element={<NewsArchive />} />
-              <Route path="/news/:id" element={<NewsDetail />} />{" "}
+              <Route path="/news/:id" element={<NewsDetail />} />
+              <Route path="/alumni" element={<Alumni />} />
             </Routes>
           </AppShell.Main>
         </AppShell>
