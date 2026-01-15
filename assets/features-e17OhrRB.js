@@ -1,1 +1,0 @@
-const e=[{title:"語言資源建置",description:"建構詞彙網、語料庫等各式語言資源供大眾使用。",image:"feature1"},{title:"語言認知及計算",description:"從認知及功能語言學觀點進行自然語言分析和處理。",image:"feature2"},{title:"自然語言處理",description:"對話系統、資訊檢索、知識圖譜建立及社群媒體分析、語言及性別、社會等等量化分析。",image:"feature3"},{title:"資料科學與文本分析",description:"利用機器學習、深度學習進行文本分析和語言的多模態觀察。",image:"feature4"}];export{e as default};
