@@ -31,12 +31,30 @@ export default function NewsArchive() {
   useEffect(() => {
     async function fetchNews() {
       try {
-        const data = await client.get({
-          endpoint: "news",
-        });
-        setNewsItems(data.contents);
+        // 如果 client 存在，嘗試從 CMS 獲取數據
+        if (client) {
+          const data = await client.get({
+            endpoint: "news",
+          });
+          setNewsItems(data.contents);
+        } else {
+          // 如果 client 不存在，使用本地 JSON 文件作為備用
+          throw new Error("CMS client not available");
+        }
       } catch (error) {
         console.error("Failed to fetch news from CMS:", error);
+        // 使用本地 JSON 文件作為備用數據源
+        try {
+          const localData = await import("../data/news/news.json");
+          // 將本地數據轉換為 NewsItem 格式（添加 id）
+          const formattedNews = localData.default.map((item, index) => ({
+            ...item,
+            id: `local-${index}`,
+          }));
+          setNewsItems(formattedNews);
+        } catch (localError) {
+          console.error("Failed to load local news data:", localError);
+        }
       }
     }
 

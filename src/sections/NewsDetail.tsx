@@ -19,13 +19,46 @@ export default function NewsDetail() {
   useEffect(() => {
     async function fetchNewsDetail() {
       try {
-        const data = await client.get({
-          endpoint: "news",
-          contentId: id,
-        });
-        setNewsItem(data);
+        // 如果 id 是本地數據格式（local-X），從本地 JSON 加載
+        if (id && id.startsWith("local-")) {
+          const index = parseInt(id.replace("local-", ""));
+          const localData = await import("../data/news/news.json");
+          if (localData.default[index]) {
+            setNewsItem({
+              ...localData.default[index],
+              id: id,
+            });
+          }
+          return;
+        }
+
+        // 如果 client 存在，嘗試從 CMS 獲取數據
+        if (client && id) {
+          const data = await client.get({
+            endpoint: "news",
+            contentId: id,
+          });
+          setNewsItem(data);
+        } else {
+          throw new Error("CMS client not available");
+        }
       } catch (error) {
         console.error("Failed to fetch news detail:", error);
+        // 如果 CMS 失敗，嘗試從本地數據查找
+        if (id && id.startsWith("local-")) {
+          try {
+            const index = parseInt(id.replace("local-", ""));
+            const localData = await import("../data/news/news.json");
+            if (localData.default[index]) {
+              setNewsItem({
+                ...localData.default[index],
+                id: id,
+              });
+            }
+          } catch (localError) {
+            console.error("Failed to load local news detail:", localError);
+          }
+        }
       }
     }
 
