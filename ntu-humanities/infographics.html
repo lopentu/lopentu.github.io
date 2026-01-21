@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>臺大文學院人文 AI 計畫資訊圖表</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Chosen Palette: NTU Heritage - Maroon (#800000), Gold (#D4AF37), Ivory (#FDFBF7), Slate Blue (#1E293B) -->
+    <!-- Application Structure Plan: 
+         1. Dashboard Header: Summarizing the core vision.
+         2. Comparative Insight: Global benchmarks vs. NTU Strengths.
+         3. Interactive Roadmap: 5-year execution phases.
+         4. The Two Engines: Detailed deep-dive into the specific labs.
+         5. Integration Matrix: A visual map of how departments connect.
+    -->
+    <!-- Visualization & Content Choices:
+         - Roadmap: Vertical Process Flow (HTML/CSS).
+         - Lab Structure: Interactive Grid Cards.
+         - Integration: Bubble Chart (Chart.js) to show departmental clustering.
+         - CONFIRMATION: NO SVG icons used, FontAwesome used instead. NO Mermaid JS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #fdfbf7;
+            color: #1e293b;
+        }
+        .serif {
+            font-family: 'Noto Serif TC', serif;
+        }
+        .ntu-maroon { color: #800000; }
+        .bg-ntu-maroon { background-color: #800000; }
+        .border-ntu-maroon { border-color: #800000; }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        .step-node {
+            transition: all 0.3s ease;
+        }
+        .step-node:hover {
+            transform: scale(1.05);
+            background-color: #fffbeb;
+        }
+        
+        @keyframes pulse-soft {
+            0% { box-shadow: 0 0 0 0 rgba(128, 0, 0, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(128, 0, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(128, 0, 0, 0); }
+        }
+        .pulse { animation: pulse-soft 2s infinite; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto bg-white shadow-2xl rounded-3xl overflow-hidden border border-gray-100">
+        
+        <!-- Header Section -->
+        <div class="bg-ntu-maroon p-8 text-white relative">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-center md:text-left">
+                    <h1 class="text-4xl md:text-5xl font-bold serif mb-2">人文 AI 未來五年計畫</h1>
+                    <p class="text-gold-200 text-lg opacity-90 tracking-widest font-light">國立臺灣大學文學院．策略執行藍圖</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20 text-center">
+                    <span class="block text-3xl font-bold">2025 - 2030</span>
+                    <span class="text-xs uppercase tracking-tighter opacity-80">Strategic Planning Cycle</span>
+                </div>
+            </div>
+            <!-- Decorative Icon -->
+            <div class="absolute right-4 bottom-4 opacity-10 text-8xl">
+                <i class="fas fa-microchip"></i>
+            </div>
+        </div>
+
+        <!-- Section 1: Global Benchmarking & Vision -->
+        <div class="p-8 border-b border-gray-100">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="col-span-1 bg-gray-50 p-6 rounded-2xl border border-gray-100">
+                    <h3 class="font-bold text-xl mb-4 ntu-maroon border-b pb-2"><i class="fas fa-globe-americas mr-2"></i>全球標竿視角</h3>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-600 mt-1 mr-2"></i>
+                            <span><strong>Stanford HAI:</strong> 以人為本的 AI 治理，將倫理嵌入計算課程。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-600 mt-1 mr-2"></i>
+                            <span><strong>Oxford:</strong> 成立 AI 倫理研究所，聚焦規範性哲學研究。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-600 mt-1 mr-2"></i>
+                            <span><strong>MIT:</strong> 培養「運算雙語」人才，重塑文科生的技術直覺。</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-span-2 flex flex-col justify-center text-center px-4">
+                    <h2 class="text-3xl font-bold mb-6">「人文驅動」的 AI 願景</h2>
+                    <div class="flex flex-wrap justify-center gap-8">
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-3 pulse">
+                                <i class="fas fa-brain text-3xl ntu-maroon"></i>
+                            </div>
+                            <span class="font-bold">理解 (Reasoning)</span>
+                        </div>
+                        <div class="text-center py-6 text-2xl text-gray-300">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-3 pulse">
+                                <i class="fas fa-code text-3xl ntu-maroon"></i>
+                            </div>
+                            <span class="font-bold">運算 (Computation)</span>
+                        </div>
+                        <div class="text-center py-6 text-2xl text-gray-300">
+                            <i class="fas fa-equals"></i>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-ntu-maroon rounded-full flex items-center justify-center mx-auto mb-3 text-white">
+                                <i class="fas fa-seedling text-3xl text-yellow-400"></i>
+                            </div>
+                            <span class="font-bold ntu-maroon">新文明範式</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: The Two Engines (Core Labs) -->
+        <div class="bg-gray-50 p-8">
+            <h2 class="text-2xl font-bold text-center mb-8 serif">
+                <i class="fas fa-cogs mr-2 ntu-maroon"></i>雙引擎跨院聯合實驗室
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Lab 1 -->
+                <div class="bg-white p-6 rounded-3xl shadow-lg border-t-8 border-blue-600 transition hover:-translate-y-2">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-blue-900">語言科學與資訊實驗室</h3>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Language Science</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-6">打破「文科不寫 code」的舊習，將語言學轉化為數據科學的先鋒。</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center p-3 bg-blue-50 rounded-xl">
+                            <i class="fas fa-database text-blue-600 mr-4"></i>
+                            <span class="text-sm font-medium">建立在地化語料庫 (LLM Fine-tuning)</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-blue-50 rounded-xl">
+                            <i class="fas fa-robot text-blue-600 mr-4"></i>
+                            <span class="text-sm font-medium">跨院合開計算語言學學程 (文院 x 電資)</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Lab 2 -->
+                <div class="bg-white p-6 rounded-3xl shadow-lg border-t-8 border-purple-600 transition hover:-translate-y-2">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-purple-900">國際藝術聯盟實驗室</h3>
+                        <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">International Arts</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-6">定義 AI 時代的「靈光」，探索人機協作的新展演型態。</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center p-3 bg-purple-50 rounded-xl">
+                            <i class="fas fa-vial text-purple-600 mr-4"></i>
+                            <span class="text-sm font-medium">生成式藝術與著作權法理研究 (文院 x 法律)</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-purple-50 rounded-xl">
+                            <i class="fas fa-vr-cardboard text-purple-600 mr-4"></i>
+                            <span class="text-sm font-medium">XR 互動劇場與數位雙生展演 (文院 x 工院)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: 5-Year Roadmap Timeline -->
+        <div class="p-8">
+            <h2 class="text-2xl font-bold text-center mb-10 serif">五年執行路徑圖 (Roadmap)</h2>
+            <div class="relative max-w-4xl mx-auto">
+                <!-- Line -->
+                <div class="absolute left-1/2 w-1 bg-gray-200 h-full transform -translate-x-1/2 hidden md:block"></div>
+                
+                <!-- Step 1 -->
+                <div class="relative mb-8 md:mb-12 flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 pr-0 md:pr-12 text-center md:text-right mb-4 md:mb-0">
+                        <h4 class="font-bold text-lg ntu-maroon">2025: 基礎建設期</h4>
+                        <p class="text-sm text-gray-500">人文算力中心成立、教師 AI 素養工作坊。</p>
+                    </div>
+                    <div class="z-10 bg-ntu-maroon text-white w-10 h-10 rounded-full flex items-center justify-center font-bold border-4 border-white shadow-md">1</div>
+                    <div class="md:w-1/2 pl-0 md:pl-12 hidden md:block"></div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative mb-8 md:mb-12 flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 pr-0 md:pr-12 hidden md:block"></div>
+                    <div class="z-10 bg-ntu-maroon text-white w-10 h-10 rounded-full flex items-center justify-center font-bold border-4 border-white shadow-md">2</div>
+                    <div class="md:w-1/2 pl-0 md:pl-12 text-center md:text-left mb-4 md:mb-0">
+                        <h4 class="font-bold text-lg ntu-maroon">2026: 雙引擎啟動</h4>
+                        <p class="text-sm text-gray-500">兩大核心實驗室掛牌、第一批跨院種子學生入駐。</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative mb-8 md:mb-12 flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 pr-0 md:pr-12 text-center md:text-right mb-4 md:mb-0">
+                        <h4 class="font-bold text-lg ntu-maroon">2027: 全院深耕期</h4>
+                        <p class="text-sm text-gray-500">歷史、哲學、外文全面導入 AI 數位典藏計畫。</p>
+                    </div>
+                    <div class="z-10 bg-ntu-maroon text-white w-10 h-10 rounded-full flex items-center justify-center font-bold border-4 border-white shadow-md">3</div>
+                    <div class="md:w-1/2 pl-0 md:pl-12 hidden md:block"></div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="relative mb-8 md:mb-12 flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 pr-0 md:pr-12 hidden md:block"></div>
+                    <div class="z-10 bg-ntu-maroon text-white w-10 h-10 rounded-full flex items-center justify-center font-bold border-4 border-white shadow-md">4</div>
+                    <div class="md:w-1/2 pl-0 md:pl-12 text-center md:text-left mb-4 md:mb-0">
+                        <h4 class="font-bold text-lg ntu-maroon">2028: 產學融合期</h4>
+                        <p class="text-sm text-gray-500">推出「AI 人文策展」證照學程、與國際博物館合作。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Department Integration Mapping -->
+        <div class="bg-gray-900 text-white p-8">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold serif mb-2">系所整合生態矩陣</h2>
+                <p class="text-gray-400 text-sm italic">如何讓每一位文學院老師都能找到位置？</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="chart-container">
+                    <canvas id="deptBubbleChart"></canvas>
+                </div>
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center shrink-0">
+                            <i class="fas fa-file-invoice text-blue-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-blue-400">數位典藏群 (Data Cluster)</h4>
+                            <p class="text-xs text-gray-400">歷史、人類學、圖資。著重於資料結構化與歷史記憶的數位保存。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center shrink-0">
+                            <i class="fas fa-balance-scale text-red-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-red-400">價值批判群 (Ethics Cluster)</h4>
+                            <p class="text-xs text-gray-400">哲學、外文、中文。探討 AI 生成內容的倫理、文學性與文化主體性。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center shrink-0">
+                            <i class="fas fa-magic text-green-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-green-400">創意轉型群 (Creative Cluster)</h4>
+                            <p class="text-xs text-gray-400">戲劇、藝術史、音樂。發展人機共創藝術與數位沉浸式感官體驗。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="p-8 text-center bg-gray-50">
+            <p class="text-sm text-gray-500 mb-4 tracking-widest">Bridging Past and Future through AI Empowerment</p>
+            <div class="flex justify-center gap-4">
+                <button class="bg-ntu-maroon text-white px-8 py-3 rounded-full font-bold shadow-lg hover:shadow-xl transition">查看完整提案書</button>
+                <button class="bg-white text-ntu-maroon border border-ntu-maroon px-8 py-3 rounded-full font-bold hover:bg-red-50 transition">加入研究小組</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('deptBubbleChart').getContext('2d');
+            
+            // Dept Integration Data
+            const deptData = {
+                datasets: [
+                    {
+                        label: '數據核心 (Archive)',
+                        data: [
+                            { x: 15, y: 85, r: 18, label: '歷史系' },
+                            { x: 30, y: 90, r: 15, label: '圖資系' },
+                            { x: 25, y: 70, r: 12, label: '人類學' }
+                        ],
+                        backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                        borderColor: 'rgba(59, 130, 246, 1)'
+                    },
+                    {
+                        label: '倫理批判 (Ethics)',
+                        data: [
+                            { x: 80, y: 80, r: 20, label: '哲學系' },
+                            { x: 75, y: 65, r: 15, label: '外文系' },
+                            { x: 85, y: 50, r: 12, label: '中文系' }
+                        ],
+                        backgroundColor: 'rgba(239, 68, 68, 0.6)',
+                        borderColor: 'rgba(239, 68, 68, 1)'
+                    },
+                    {
+                        label: '應用創意 (Creative)',
+                        data: [
+                            { x: 60, y: 25, r: 18, label: '戲劇系' },
+                            { x: 80, y: 15, r: 15, label: '藝術史' },
+                            { x: 40, y: 10, r: 12, label: '音樂所' }
+                        ],
+                        backgroundColor: 'rgba(34, 197, 94, 0.6)',
+                        borderColor: 'rgba(34, 197, 94, 1)'
+                    },
+                    {
+                        label: '技術連結 (Tech)',
+                        data: [
+                            { x: 50, y: 50, r: 25, label: '語言所' }
+                        ],
+                        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                        borderColor: 'rgba(255, 255, 255, 1)'
+                    }
+                ]
+            };
+
+            new Chart(ctx, {
+                type: 'bubble',
+                data: deptData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            display: true,
+                            title: { display: true, text: '人文內容厚度', color: '#666' },
+                            min: 0, max: 100,
+                            grid: { color: 'rgba(255,255,255,0.05)' }
+                        },
+                        y: {
+                            display: true,
+                            title: { display: true, text: '數位轉型急迫性', color: '#666' },
+                            min: 0, max: 100,
+                            grid: { color: 'rgba(255,255,255,0.05)' }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { color: '#fff', padding: 20, font: { size: 10 } }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => context.raw.label
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

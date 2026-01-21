@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>臺大文學院：人文 AI 未來五年策略規劃</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Chosen Palette: Academic Zen - Warm Beige Background (#fdfbf7), Deep NTU Maroon (#800000), Slate Grey Text (#334155), Gold Accent (#d4af37) -->
+    <!-- Application Structure Plan: 
+         1. Hero Section: Vision & Mission Statement.
+         2. Global Context Dashboard: Interactive cards comparing top universities' AI strategies to identify the "Crisis & Response".
+         3. The 5-Year Roadmap: A vertical timeline showing the progression from Infrastructure to Global Impact.
+         4. Cross-Disciplinary Labs (The Engine): Split-view interactive diagrams for "Language Science" and "International Arts".
+         5. College-Wide Integration (The Ecosystem): A dynamic bubble chart mapping traditional departments (History, Philosophy, etc.) to AI thematic clusters.
+         6. Strategic Analysis: A Radar chart comparing current capabilities vs. future goals.
+         RATIONALE: This structure moves from the "Why" (Global context) to the "How" (Labs & Timeline) and finally the "Who" (Departmental Integration), facilitating a logical narrative flow for stakeholders.
+    -->
+    <!-- Visualization & Content Choices:
+         - Global Trends: Interactive Cards (HTML/JS) -> Goal: Inform & Compare -> Allows clicking to reveal "Crisis" vs "Response" for each institution.
+         - 5-Year Plan: Interactive Timeline (HTML/CSS) -> Goal: Change/Process -> Highlights key milestones per year.
+         - Department Mapping: Bubble Chart (Chart.js) -> Goal: Relationships -> Shows how diverse departments cluster around AI themes (Ethics, Data, Preservation).
+         - Strategic Gap: Radar Chart (Chart.js) -> Goal: Compare -> Visualizes the shift from "Traditional Humanities" to "AI-Augmented Humanities".
+         - Lab Architecture: Grid Layouts (HTML/Tailwind) -> Goal: Organize -> Visually structures the interdisciplinary components of the two proposed labs.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used (FontAwesome JS used for icons). NO Mermaid JS used. -->
+
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #fdfbf7;
+            color: #334155;
+        }
+        h1, h2, h3, .serif {
+            font-family: 'Noto Serif TC', serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 500px;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .active-tab {
+            border-bottom: 2px solid #800000;
+            color: #800000;
+            font-weight: 700;
+        }
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #e2e8f0;
+            transform: translateX(-50%);
+        }
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-red-900 serif">臺大文學院 <span class="text-gray-500 text-sm font-sans font-normal ml-2">人文 AI 五年計劃</span></span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#global-context" class="text-gray-600 hover:text-red-900 transition">全球趨勢</a>
+                    <a href="#roadmap" class="text-gray-600 hover:text-red-900 transition">五年路徑</a>
+                    <a href="#labs" class="text-gray-600 hover:text-red-900 transition">雙引擎實驗室</a>
+                    <a href="#integration" class="text-gray-600 hover:text-red-900 transition">全院整合</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative bg-gradient-to-b from-[#fdfbf7] to-white pt-16 pb-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
+                人文價值的 <span class="text-red-900">AI 賦能與重塑</span>
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500 leading-relaxed">
+                面對生成式 AI 帶來的「作者之死」與知識生產危機，臺大文學院不應止於防守，而應主動定義 AI 時代的人文精神。本計畫旨在透過跨領域實驗室與全院整合，打造具備全球影響力的「人文 AI 生態系」。
+            </p>
+            <div class="mt-10 flex justify-center gap-4">
+                <button onclick="document.getElementById('roadmap').scrollIntoView({behavior: 'smooth'})" class="px-8 py-3 bg-red-900 text-white rounded-lg shadow hover:bg-red-800 transition font-medium">
+                    探索五年藍圖
+                </button>
+                <button onclick="document.getElementById('labs').scrollIntoView({behavior: 'smooth'})" class="px-8 py-3 bg-white text-red-900 border border-red-900 rounded-lg shadow-sm hover:bg-gray-50 transition font-medium">
+                    檢視核心實驗室
+                </button>
+            </div>
+        </div>
+        <!-- Decorative Background Elements -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
+            <div class="absolute top-10 left-10 text-9xl text-gray-300">文</div>
+            <div class="absolute bottom-10 right-10 text-9xl text-gray-300">AI</div>
+        </div>
+    </header>
+
+    <!-- Section 1: Global Context (Crisis & Response) -->
+    <section id="global-context" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">全球頂尖大學的危機與因應</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    我們分析了 Stanford HAI、Oxford Institute for Ethics in AI 等機構的策略，歸納出當前人文學院面臨的共同挑戰與轉型方向。點擊下方卡片查看詳情。
+                </p>
+            </div>
+
+            <!-- Interactive Cards Container -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="global-cards">
+                <!-- Cards will be injected by JS -->
+            </div>
+
+            <!-- Radar Chart: NTU Gap Analysis -->
+            <div class="mt-16 bg-gray-50 rounded-2xl p-8 shadow-sm">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="w-full md:w-1/3 mb-8 md:mb-0 md:pr-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">臺大文學院的轉型目標</h3>
+                        <p class="text-gray-600 mb-4">
+                            透過雷達圖分析，我們看見從「傳統人文」向「AI 人文」轉型的關鍵指標。目標並非取代傳統，而是在其基礎上擴展運算能力與跨域影響力。
+                        </p>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 強化運算思維 (Computational Thinking)</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 擴展產學連結 (Industry Impact)</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 深化倫理批判 (Ethical Critique)</li>
+                        </ul>
+                    </div>
+                    <div class="w-full md:w-2/3">
+                        <div class="chart-container">
+                            <canvas id="strategyRadar"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: 5-Year Roadmap -->
+    <section id="roadmap" class="py-16 bg-[#fdfbf7]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">五年執行藍圖</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    從基礎建設到國際影響力的階段性規劃。
+                </p>
+            </div>
+
+            <div class="relative">
+                <div class="timeline-line"></div>
+                <div class="space-y-12" id="timeline-container">
+                    <!-- Timeline Items injected by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Dual Engine Labs -->
+    <section id="labs" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">跨院聯合實驗室：轉型的雙引擎</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    我們提出兩個示範性的跨域實驗室設計，作為引領全院轉型的先鋒。
+                </p>
+            </div>
+
+            <!-- Tab Controls -->
+            <div class="flex justify-center mb-8 border-b border-gray-200">
+                <button onclick="switchLab('lang')" id="tab-lang" class="px-6 py-3 text-lg font-medium active-tab transition-colors focus:outline-none">
+                    <i class="fas fa-comments mr-2"></i>語言科學與資訊
+                </button>
+                <button onclick="switchLab('art')" id="tab-art" class="px-6 py-3 text-lg font-medium text-gray-500 hover:text-red-900 transition-colors focus:outline-none">
+                    <i class="fas fa-paint-brush mr-2"></i>國際藝術聯盟
+                </button>
+            </div>
+
+            <!-- Lab Content Container -->
+            <div id="lab-content" class="bg-gray-50 rounded-2xl p-8 border border-gray-100 shadow-sm min-h-[500px]">
+                <!-- Dynamic Content Loaded Here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Integration Strategy (The Ecosystem) -->
+    <section id="integration" class="py-16 bg-[#fdfbf7]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">全院系所整合策略</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    人文 AI 不僅是少數人的實驗，而是全院的升級。我們將各系所的研究專長對應至三大 AI 核心領域：<b>資料 (Data)</b>、<b>倫理 (Ethics)</b>、<b>應用 (Application)</b>。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-blue-500">
+                    <h4 class="font-bold text-xl mb-2 text-blue-900">數位資產與保存 (Archive)</h4>
+                    <p class="text-sm text-gray-600">歷史、人類學、圖資。專注於將人文資料結構化，建立專屬的小型語言模型 (SLM) 訓練集。</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-red-500">
+                    <h4 class="font-bold text-xl mb-2 text-red-900">批判與倫理 (Ethics)</h4>
+                    <p class="text-sm text-gray-600">哲學、外文、日文。專注於 AI 生成內容的價值判斷、偏見分析與跨文化溝通。</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-green-500">
+                    <h4 class="font-bold text-xl mb-2 text-green-900">創作與展演 (Creation)</h4>
+                    <p class="text-sm text-gray-600">戲劇、藝術史、音樂。專注於人機協作的新型態展演與生成式藝術。</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl shadow-sm">
+                <div class="flex justify-between items-center mb-4 px-4">
+                    <h3 class="text-xl font-bold text-gray-800">系所整合分佈圖</h3>
+                    <div class="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                        <i class="fas fa-mouse-pointer mr-1"></i> 點擊氣泡查看整合策略
+                    </div>
+                </div>
+                <div class="chart-container" style="height: 500px; max-height: 600px;">
+                    <canvas id="integrationBubble"></canvas>
+                </div>
+                <!-- Detail Panel for Bubble Chart -->
+                <div id="dept-detail" class="mt-4 p-4 bg-yellow-50 border border-yellow-100 rounded-lg hidden transition-all">
+                    <h4 id="dept-title" class="font-bold text-lg text-yellow-800"></h4>
+                    <p id="dept-desc" class="text-yellow-900 mt-2"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold serif mb-4">國立臺灣大學文學院</h3>
+                    <p class="text-gray-400">人文 AI 計劃辦公室 (擬)</p>
+                    <p class="text-gray-400 mt-2">連結過去與未來的橋樑，定義人與機器的共生智慧。</p>
+                </div>
+                <div class="flex flex-col md:items-end justify-center">
+                    <button class="bg-red-800 hover:bg-red-700 text-white px-6 py-3 rounded-lg transition mb-4">
+                        下載完整提案書 (PDF)
+                    </button>
+                    <p class="text-gray-500 text-sm">© 2024 NTU College of Liberal Arts. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Data Store
+        const appData = {
+            globalTrends: [
+                {
+                    uni: "Stanford HAI",
+                    focus: "以人為本 (Human-Centered)",
+                    crisis: "技術至上主義導致人文價值邊緣化。",
+                    response: "強調 AI 必須增強而非取代人類能力。將倫理學嵌入 CS 核心課程。",
+                    icon: "fa-university"
+                },
+                {
+                    uni: "Oxford Ethics in AI",
+                    focus: "哲學與治理 (Governance)",
+                    crisis: "演算法偏見與民主制度的侵蝕。",
+                    response: "利用深厚的哲學傳統，建立 AI 治理的全球標準與框架。",
+                    icon: "fa-gavel"
+                },
+                {
+                    uni: "MIT Schwarzman",
+                    focus: "雙語人才 (Bilinguals)",
+                    crisis: "文科生不懂 Code，理科生不懂 Context。",
+                    response: "創造「運算雙語」人才，在人文學科中直接開發專屬的 AI 工具。",
+                    icon: "fa-code-branch"
+                }
+            ],
+            timeline: [
+                { year: "Year 1", title: "基礎建設期", desc: "建立高算力人文伺服器；開設「Python for Humanities」必修課；成立跨院規劃小組。", side: "left" },
+                { year: "Year 2", title: "種子萌芽期", desc: "啟動「語言科學」與「國際藝術」兩大示範實驗室；提供教師 AI 融入教學補助。", side: "right" },
+                { year: "Year 3", title: "跨域深化期", desc: "各系所建立專屬 SLM (Small Language Models) 資料庫；舉辦首屆亞太人文 AI 高峰會。", side: "left" },
+                { year: "Year 4", title: "產學擴散期", desc: "與科技巨頭 (Google, Nvidia) 成立人文聯合研發中心；推出「AI 文化策展」學程。", side: "right" },
+                { year: "Year 5", title: "全球影響期", desc: "發布「臺大人文 AI 宣言」；成為華語世界 Digital Humanities 的首要重鎮。", side: "left" }
+            ],
+            labs: {
+                lang: {
+                    title: "語言科學與資訊學程 (Linguistics & Informatics)",
+                    subtitle: "解碼人類語言，賦予機器靈魂",
+                    content: `
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="bg-white p-6 rounded-xl border border-gray-200">
+                                <h4 class="font-bold text-xl text-red-900 mb-4 border-b pb-2">核心任務</h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start"><i class="fas fa-brain text-gray-400 mt-1 mr-3"></i> <span><strong>認知建模：</strong>結合心理語言學與 NLP，研究人類理解語言的認知機制。</span></li>
+                                    <li class="flex items-start"><i class="fas fa-database text-gray-400 mt-1 mr-3"></i> <span><strong>語料庫建置：</strong>建立台灣特有的多語言（華、台、客、原）高品質語料庫。</span></li>
+                                    <li class="flex items-start"><i class="fas fa-laptop-code text-gray-400 mt-1 mr-3"></i> <span><strong>跨域課程：</strong>與資工系合開「計算語言學導論」、「大型語言模型微調實務」。</span></li>
+                                </ul>
+                            </div>
+                            <div class="bg-white p-6 rounded-xl border border-gray-200">
+                                <h4 class="font-bold text-xl text-blue-900 mb-4 border-b pb-2">運作模式</h4>
+                                <div class="space-y-4">
+                                    <div class="flex items-center p-3 bg-blue-50 rounded-lg">
+                                        <div class="bg-blue-200 p-2 rounded-full mr-4"><i class="fas fa-user-graduate"></i></div>
+                                        <div><p class="font-bold">文學院學生</p><p class="text-sm">學習 Python 與數據結構</p></div>
+                                    </div>
+                                    <div class="flex justify-center text-gray-400"><i class="fas fa-plus"></i></div>
+                                    <div class="flex items-center p-3 bg-green-50 rounded-lg">
+                                        <div class="bg-green-200 p-2 rounded-full mr-4"><i class="fas fa-robot"></i></div>
+                                        <div><p class="font-bold">工學院學生</p><p class="text-sm">學習語義學與語用學</p></div>
+                                    </div>
+                                    <div class="flex justify-center text-gray-400"><i class="fas fa-arrow-down"></i></div>
+                                    <div class="text-center font-bold text-blue-900 border border-blue-200 p-3 rounded-lg bg-white shadow-sm">
+                                        產出：具備語言敏感度的 AI 工程師 / 懂技術的語言學家
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                art: {
+                    title: "國際藝術聯盟 (International Arts Alliance)",
+                    subtitle: "科技作為畫筆，數據作為顏料",
+                    content: `
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="bg-white p-6 rounded-xl border border-gray-200">
+                                <h4 class="font-bold text-xl text-red-900 mb-4 border-b pb-2">核心任務</h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start"><i class="fas fa-vr-cardboard text-gray-400 mt-1 mr-3"></i> <span><strong>沈浸式展演：</strong>戲劇系與資工系合作，開發 VR/AR 互動劇場。</span></li>
+                                    <li class="flex items-start"><i class="fas fa-palette text-gray-400 mt-1 mr-3"></i> <span><strong>生成式藝術：</strong>探討 AI 圖像生成的藝術性與著作權邊界（藝術史）。</span></li>
+                                    <li class="flex items-start"><i class="fas fa-globe text-gray-400 mt-1 mr-3"></i> <span><strong>數位策展：</strong>利用 AI 算法進行全球藝術藏品的關聯性分析與線上策展。</span></li>
+                                </ul>
+                            </div>
+                            <div class="bg-white p-6 rounded-xl border border-gray-200">
+                                <h4 class="font-bold text-xl text-purple-900 mb-4 border-b pb-2">跨域專案：數位謬思</h4>
+                                <div class="relative h-64 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden group">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-purple-500 to-indigo-600 opacity-10"></div>
+                                    <div class="text-center p-4">
+                                        <i class="fas fa-magic text-4xl text-purple-600 mb-3"></i>
+                                        <h5 class="font-bold text-lg">AI 協作劇本創作系統</h5>
+                                        <p class="text-sm text-gray-600 mt-2">輸入經典劇本結構，AI 協助生成對話變體，由人類編劇進行再創作。</p>
+                                        <span class="inline-block mt-4 px-3 py-1 bg-white border border-purple-200 rounded text-xs text-purple-800">戲劇系 x 資工系 NLP Lab</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                }
+            },
+            deptIntegration: [
+                { label: "歷史系", x: 20, y: 80, r: 15, theme: "Archive", desc: "數位人文 GIS，歷史大數據分析" },
+                { label: "哲學系", x: 80, y: 20, r: 12, theme: "Ethics", desc: "AI 倫理學，意識哲學" },
+                { label: "圖資系", x: 30, y: 90, r: 18, theme: "Archive", desc: "知識圖譜建構，資訊架構設計" },
+                { label: "中文系", x: 40, y: 70, r: 20, theme: "Archive", desc: "古典文獻數位化，詩詞生成研究" },
+                { label: "外文系", x: 70, y: 30, r: 15, theme: "Ethics", desc: "數位文學批評，機器翻譯後編輯" },
+                { label: "戲劇系", x: 85, y: 85, r: 15, theme: "Creation", desc: "互動媒體表演，虛擬製作" },
+                { label: "藝術史", x: 90, y: 70, r: 12, theme: "Creation", desc: "數位典藏，AI 圖像風格分析" },
+                { label: "語言所", x: 50, y: 50, r: 25, theme: "Tech Core", desc: "計算語言學，語音處理 (核心橋樑)" },
+                { label: "人類學", x: 30, y: 60, r: 12, theme: "Archive", desc: "數位田野，文化遺產 3D 建模" },
+                { label: "日文系", x: 65, y: 40, r: 10, theme: "Ethics", desc: "跨文化溝通 AI 輔助" },
+                { label: "音樂所", x: 80, y: 90, r: 10, theme: "Creation", desc: "AI 音樂生成與分析" }
+            ]
+        };
+
+        // Render Functions
+        function renderGlobalCards() {
+            const container = document.getElementById('global-cards');
+            appData.globalTrends.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-6 rounded-xl border border-gray-100 card-hover transition-all duration-300 cursor-pointer group";
+                card.innerHTML = `
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-red-900 mr-3">
+                            <i class="fas ${item.icon}"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-gray-800">${item.uni}</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">核心策略</p>
+                        <p class="text-gray-900 font-medium">${item.focus}</p>
+                        
+                        <div class="pt-4 border-t border-gray-100">
+                            <p class="text-sm text-red-600 font-semibold mb-1"><i class="fas fa-exclamation-triangle mr-1"></i> 危機</p>
+                            <p class="text-sm text-gray-600 mb-3">${item.crisis}</p>
+                            
+                            <p class="text-sm text-green-600 font-semibold mb-1"><i class="fas fa-lightbulb mr-1"></i> 因應</p>
+                            <p class="text-sm text-gray-600">${item.response}</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderTimeline() {
+            const container = document.getElementById('timeline-container');
+            appData.timeline.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = `relative flex items-center justify-between md:justify-normal ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`;
+                
+                // Content styling based on side
+                const contentClasses = "w-full md:w-5/12 bg-white p-6 rounded-xl shadow-sm border-l-4 border-red-900 z-10";
+                
+                div.innerHTML = `
+                    <div class="hidden md:block w-5/12"></div>
+                    <div class="absolute left-0 md:left-1/2 w-8 h-8 bg-red-900 rounded-full border-4 border-white transform -translate-x-1/2 flex items-center justify-center z-20">
+                        <span class="text-white text-xs font-bold">${index + 1}</span>
+                    </div>
+                    <div class="${contentClasses} ml-8 md:ml-0">
+                        <span class="text-red-900 font-bold text-sm tracking-widest uppercase mb-1 block">${item.year}</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">${item.title}</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">${item.desc}</p>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function switchLab(labKey) {
+            // Update UI Tabs
+            document.querySelectorAll('button[id^="tab-"]').forEach(btn => {
+                btn.classList.remove('active-tab', 'text-red-900');
+                btn.classList.add('text-gray-500');
+            });
+            const activeBtn = document.getElementById(`tab-${labKey}`);
+            activeBtn.classList.add('active-tab');
+            activeBtn.classList.remove('text-gray-500');
+
+            // Render Content
+            const lab = appData.labs[labKey];
+            const contentDiv = document.getElementById('lab-content');
+            
+            // Fade effect
+            contentDiv.style.opacity = '0';
+            setTimeout(() => {
+                contentDiv.innerHTML = `
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-gray-900">${lab.title}</h3>
+                        <p class="text-lg text-gray-500 italic mt-2">${lab.subtitle}</p>
+                    </div>
+                    ${lab.content}
+                `;
+                contentDiv.style.opacity = '1';
+            }, 200);
+        }
+
+        // Charts Initialization
+        function initCharts() {
+            // Radar Chart: Strategy Gap
+            const ctxRadar = document.getElementById('strategyRadar').getContext('2d');
+            new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: ['數據素養', '跨域合作', '社會影響力', '倫理批判', '國際連結', '資源爭取'],
+                    datasets: [{
+                        label: '當前狀態 (2024)',
+                        data: [30, 40, 60, 80, 50, 40],
+                        fill: true,
+                        backgroundColor: 'rgba(148, 163, 184, 0.2)',
+                        borderColor: 'rgb(148, 163, 184)',
+                        pointBackgroundColor: 'rgb(148, 163, 184)',
+                    }, {
+                        label: '目標狀態 (2029)',
+                        data: [85, 90, 90, 95, 85, 80],
+                        fill: true,
+                        backgroundColor: 'rgba(128, 0, 0, 0.2)',
+                        borderColor: 'rgb(128, 0, 0)',
+                        pointBackgroundColor: 'rgb(128, 0, 0)',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: '#e2e8f0' },
+                            grid: { color: '#e2e8f0' },
+                            pointLabels: {
+                                font: { size: 12, family: "'Noto Sans TC', sans-serif" },
+                                color: '#475569'
+                            },
+                            ticks: { display: false } // Hide numbers on axis
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+
+            // Bubble Chart: Department Integration
+            const ctxBubble = document.getElementById('integrationBubble').getContext('2d');
+            const bubbleChart = new Chart(ctxBubble, {
+                type: 'bubble',
+                data: {
+                    datasets: [{
+                        label: '數位資產 (Archive)',
+                        data: appData.deptIntegration.filter(d => d.theme === 'Archive'),
+                        backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                    },
+                    {
+                        label: '批判與倫理 (Ethics)',
+                        data: appData.deptIntegration.filter(d => d.theme === 'Ethics'),
+                        backgroundColor: 'rgba(239, 68, 68, 0.6)',
+                        borderColor: 'rgba(239, 68, 68, 1)',
+                    },
+                    {
+                        label: '創作與展演 (Creation)',
+                        data: appData.deptIntegration.filter(d => d.theme === 'Creation'),
+                        backgroundColor: 'rgba(34, 197, 94, 0.6)',
+                        borderColor: 'rgba(34, 197, 94, 1)',
+                    },
+                    {
+                        label: '核心橋樑 (Tech Core)',
+                        data: appData.deptIntegration.filter(d => d.theme === 'Tech Core'),
+                        backgroundColor: 'rgba(107, 114, 128, 0.8)',
+                        borderColor: 'rgba(107, 114, 128, 1)',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'AI 技術介入程度 (Low -> High)' },
+                            min: 0, max: 100,
+                            grid: { display: false }
+                        },
+                        y: {
+                            title: { display: true, text: '人文內容依賴程度 (Low -> High)' },
+                            min: 0, max: 100,
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw.label + ": " + context.raw.desc;
+                                }
+                            }
+                        },
+                        legend: { position: 'bottom' }
+                    },
+                    onClick: (e) => {
+                        const points = bubbleChart.getElementsAtEventForMode(e, 'nearest', { intersect: true }, true);
+                        if (points.length) {
+                            const firstPoint = points[0];
+                            const data = bubbleChart.data.datasets[firstPoint.datasetIndex].data[firstPoint.index];
+                            
+                            const detailPanel = document.getElementById('dept-detail');
+                            const title = document.getElementById('dept-title');
+                            const desc = document.getElementById('dept-desc');
+                            
+                            title.textContent = data.label + " - " + data.theme;
+                            desc.textContent = "整合策略： " + data.desc;
+                            detailPanel.classList.remove('hidden');
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', () => {
+            renderGlobalCards();
+            renderTimeline();
+            switchLab('lang'); // Default Lab
+            initCharts();
+            
+            // Add Fade-in animation to Lab Content
+            const labContent = document.getElementById('lab-content');
+            labContent.style.transition = 'opacity 0.3s ease-in-out';
+        });
+
+    </script>
+</body>
+</html>
