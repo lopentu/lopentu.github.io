@@ -1,0 +1,1 @@
+const e=[{englishName:"Pierre Magistry",chineseName:"馬基石",degree:"Post-doc researcher, National Taiwan University, Taiwan",thesis:null},{englishName:"Yu-Hsiang Tseng",chineseName:"曾昱翔",degree:"Post-doc researcher, Universität Tübingen"}];export{e as default};
