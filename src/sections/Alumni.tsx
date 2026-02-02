@@ -12,6 +12,7 @@ export default function Alumni() {
   const [alumni, setAlumni] = useState<Member[]>([]);
   const [researchAssistants, setResearchAssistants] = useState<Member[]>([]);
   const [postdocs, setPostdocs] = useState<Member[]>([]);
+  const [fullTimeAssistants, setFullTimeAssistants] = useState<Member[]>([]);
 
   useEffect(() => {
     // Ensure we start at top when entering the alumni page
@@ -32,6 +33,11 @@ export default function Alumni() {
         "../data/alumni/postdoctoral_researchers.json"
       );
       setPostdocs(postdocsData.default);
+
+      const fullTimeAssistantsData = await import(
+        "../data/alumni/full_time_assistants.json"
+      );
+      setFullTimeAssistants(fullTimeAssistantsData.default);
     }
 
     fetchData();
@@ -115,14 +121,6 @@ export default function Alumni() {
           </div>
         )}
 
-        {others.length > 0 && (
-          <div>
-            <Title order={3} align="center" m={"sm"}>
-              其他
-            </Title>
-            {renderMembers(others)}
-          </div>
-        )}
       </div>
     );
   };
@@ -146,9 +144,14 @@ export default function Alumni() {
         {renderMembers(researchAssistants)}
 
         <Title order={2} align="center" m={"xl"}>
-          博士後研究員＆專任助理
+          博士後研究員
         </Title>
         {renderMembers(postdocs)}
+
+        <Title order={2} align="center" m={"xl"}>
+          專任助理
+        </Title>
+        {renderMembers(fullTimeAssistants)}
       </Container>
     </>
   );
