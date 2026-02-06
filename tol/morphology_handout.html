@@ -242,6 +242,8 @@ body {
     font-size: 16px;
     line-height: 1.8;
     color: #333;
+    max-width: 60em !important; /* 增加宽度从默认的 36em 到 60em */
+    margin: 0 auto !important;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Lato', 'Noto Serif TC', 'PMingLiU', 'MingLiU', 'Microsoft YaHei', serif;
@@ -315,6 +317,14 @@ code {
 .highlight-block-pink { background-color: #fce4ec; padding: 12px 16px; border-radius: 6px; border-left: 4px solid #e91e63; margin: 12px 0; display: block; }
 .highlight-block-orange { background-color: #fff3e0; padding: 12px 16px; border-radius: 6px; border-left: 4px solid #ff9800; margin: 12px 0; display: block; }
 .highlight-block code { background-color: transparent; padding: 0; }
+
+/* 圖片大小限制 */
+img {
+    max-width: 60% !important;
+    height: auto !important;
+    display: block !important;
+    margin: 1em auto !important;
+}
 
 /* 文檔標題樣式（目錄上方） */
 #title-block-header {
@@ -439,6 +449,94 @@ code {
     font-weight: 600;
     font-size: 1.05em;
     color: #1e293b;
+}
+
+/* 右側固定目錄樣式 */
+#TOC-sidebar {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 280px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+    display: none;
+    font-size: 0.9em;
+}
+
+#TOC-sidebar.show {
+    display: block;
+}
+
+#TOC-sidebar h2 {
+    color: #800000;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0 0 15px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0;
+    font-family: 'Noto Serif TC', 'PMingLiU', 'MingLiU', serif;
+}
+
+#TOC-sidebar ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+#TOC-sidebar ul ul {
+    padding-left: 16px;
+    margin-top: 4px;
+    border-left: 2px solid #e8e8e8;
+    margin-left: 6px;
+}
+
+#TOC-sidebar li {
+    margin: 6px 0;
+    line-height: 1.5;
+}
+
+#TOC-sidebar a {
+    color: #334155;
+    text-decoration: none;
+    display: block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    font-family: 'Lato', 'Noto Serif TC', 'PMingLiU', 'MingLiU', serif;
+}
+
+#TOC-sidebar a:hover {
+    background-color: #f0f0f0;
+    color: #800000;
+    text-decoration: none;
+}
+
+#TOC-sidebar > ul > li > a {
+    font-weight: 600;
+    font-size: 0.95em;
+    color: #1e293b;
+}
+
+/* 當右側目錄顯示時，調整主內容區域 */
+body.sidebar-active {
+    padding-right: 320px;
+}
+
+/* 響應式：小屏幕隱藏右側目錄 */
+@media (max-width: 1200px) {
+    #TOC-sidebar {
+        display: none !important;
+    }
+    body.sidebar-active {
+        padding-right: 50px;
+    }
+}
     padding: 8px 12px;
     margin-bottom: 4px;
 }
@@ -482,6 +580,7 @@ code {
 <h1 id="part-i.-concepts-strategies">Part I. Concepts &amp;
 Strategies</h1>
 <p><em>(How words encode grammar — and how to reason it out)</em></p>
+<p><img src="langCube.jpg" /></p>
 <hr />
 <h2 id="什麼是構詞學-what-is-morphology-in-olympiad-terms">1.
 什麼是構詞學？ | What is Morphology (in Olympiad Terms)?</h2>
@@ -1915,6 +2014,89 @@ function showFinalResult() {
 window.addEventListener('DOMContentLoaded', loadQuestion);
 </script>
 </details>
+<script>
+// 右側固定目錄功能
+(function() {
+    // 等待 DOM 加載完成
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initSidebarTOC);
+    } else {
+        initSidebarTOC();
+    }
+    
+    function initSidebarTOC() {
+        const originalTOC = document.getElementById('TOC');
+        if (!originalTOC) return;
+        
+        // 創建右側目錄容器
+        const sidebarTOC = document.createElement('div');
+        sidebarTOC.id = 'TOC-sidebar';
+        sidebarTOC.innerHTML = originalTOC.innerHTML;
+        document.body.appendChild(sidebarTOC);
+        
+        // 滾動時顯示/隱藏右側目錄
+        let lastScrollTop = 0;
+        const scrollThreshold = 300; // 滾動超過 300px 後顯示
+        
+        function handleScroll() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > scrollThreshold) {
+                sidebarTOC.classList.add('show');
+                document.body.classList.add('sidebar-active');
+            } else {
+                sidebarTOC.classList.remove('show');
+                document.body.classList.remove('sidebar-active');
+            }
+            
+            // 高亮當前章節
+            highlightCurrentSection();
+            
+            lastScrollTop = scrollTop;
+        }
+        
+        // 高亮當前章節
+        function highlightCurrentSection() {
+            const sections = document.querySelectorAll('h1[id], h2[id], h3[id]');
+            const sidebarLinks = sidebarTOC.querySelectorAll('a');
+            
+            let currentSection = '';
+            
+            for (let i = sections.length - 1; i >= 0; i--) {
+                const section = sections[i];
+                const rect = section.getBoundingClientRect();
+                
+                if (rect.top <= 100) {
+                    currentSection = section.id;
+                    break;
+                }
+            }
+            
+            // 移除所有高亮
+            sidebarLinks.forEach(link => {
+                link.style.backgroundColor = '';
+                link.style.color = '';
+            });
+            
+            // 高亮當前章節
+            if (currentSection) {
+                const currentLink = sidebarTOC.querySelector(`a[href="#${currentSection}"]`);
+                if (currentLink) {
+                    currentLink.style.backgroundColor = '#fff5f5';
+                    currentLink.style.color = '#800000';
+                    currentLink.style.fontWeight = 'bold';
+                }
+            }
+        }
+        
+        // 監聽滾動事件
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        
+        // 初始檢查
+        handleScroll();
+    }
+})();
+</script>
 <!-- 
 ---
 
